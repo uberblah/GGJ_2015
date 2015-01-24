@@ -16,7 +16,7 @@ public class enemy : Actor
     protected override Vector2 GetMove()
     {
         // Move towards player
-        return Vector2.MoveTowards(transform.position, player.transform.position);
+        return Vector2.MoveTowards(transform.position, player.transform.position, 1);
     }
 	
 	// Update is called once per frame
