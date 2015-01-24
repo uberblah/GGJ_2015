@@ -83,11 +83,6 @@ public class Player : Actor {
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        // Damage enemy on touch
-        Destructible enemyDes = col.gameObject.GetComponent<Destructible>();
-        if (enemyDes != null)
-        {
-            enemyDes.Damage(200);
-        }
+
     }
 }
