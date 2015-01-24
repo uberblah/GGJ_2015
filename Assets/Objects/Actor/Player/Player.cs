@@ -7,9 +7,8 @@ public class Player : Actor {
     public float force; // Force added on move
     public float cursorWeight = 0.25f; //weight of cursor in camera position
 
-    // Temporary
-    public GameObject   projectile;
-    static float        lastFire;
+    private float       lastToolUse; // Last time we used tool
+    private Tool        currentTool; // Tool we're currently using
 
     protected override Vector2 GetMove()
     {
@@ -59,7 +58,7 @@ public class Player : Actor {
 
     protected override bool GetUseTool()
     {
-        return Input.GetAxisRaw("Tool") > 0.0f;
+        return Input.GetAxisRaw("Fire1") > 0.0f;
     }
 
     protected override void Start()
@@ -84,14 +83,12 @@ public class Player : Actor {
         //Debug.Log("World mouse pos:" + view.ScreenToWorldPoint(Input.mousePosition).x + "," + view.ScreenToWorldPoint(Input.mousePosition).y);
         //Debug.Log("View mouse pos:" + Input.mousePosition.x + "," + Input.mousePosition.y);
 
-        // TEMPORARY: fire projectile
-        if (Input.GetAxisRaw("Fire1") > 0)
+        // Use a tool
+        if (GetUseTool() && currentTool != null) // Make sure tool is valid
         {
-            if (Time.time > lastFire + 0.5f)
+            if (Time.time > lastToolUse + currentTool.GetDelay())
             {
-                Instantiate(projectile,this.transform.position,Quaternion.identity);
-                projectile.GetComponent<Projectile>().SetDirection(Vector2.right);
-                lastFire = Time.time;
+                currentTool.Activate();
             }
         }
     }

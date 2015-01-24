@@ -10,8 +10,9 @@ public class Tool : Item
 {
     public String toolName; //What's the tool called?
     public String toolDesc; //Short description of the tool
-	
+    public float useDelay; // Delay time between uses
 
+    public float GetDelay() { return useDelay; }
 
     public virtual void Activate()
     {
