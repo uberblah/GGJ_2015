@@ -10,7 +10,7 @@ public class Inventory
 	public void Start()
 	{
 		usingItem = false;
-		List<Item> items = new List<Item> ();
+		items = new List<Item> ();
 	}
 
     public void rightShift()

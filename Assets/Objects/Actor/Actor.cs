@@ -61,6 +61,7 @@ public class Actor : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
+        inv = new Inventory();
         body = GetComponent<Rigidbody2D>();
         if (body == null) Debug.Log(name + " failed to find its body!");
         coll = GetComponent<CircleCollider2D>();
