@@ -15,7 +15,7 @@ public class Inventory
 
 	public void itemIsNowBeingUsed(Item i)
 	{
-		currentlyActiveItem = items.FindIndex (i);
+		currentlyActiveItem = items.IndexOf(i);
 		usingItem = true;
 		i.itemNowBeingUsed ();
 	}

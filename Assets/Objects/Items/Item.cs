@@ -18,7 +18,7 @@ public class Item : MonoBehaviour
 
 	public void itemPickedUp()
 	{
-		//Is the item put into an inventory? HIDE It 
+		//Is the item put into an inventory?
 		renderer.enabled = false;
 		body.collider2D.enabled = false;
 	}
