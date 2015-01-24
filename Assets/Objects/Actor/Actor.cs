@@ -26,7 +26,28 @@ public class Actor : MonoBehaviour
         return 0;
     }
 
+    //Inventory::Use Current Tool
     protected virtual bool GetUseTool()
+    {
+        return false;
+    }
+    //Inventory::Pick Up Item
+    protected virtual bool GetPickup()
+    {
+        return false;
+    }
+    //Inventory::Drop Current Item
+    protected virtual bool GetDrop()
+    {
+        return false;
+    }
+    //Inventory::Next Item
+    protected virtual bool GetNextItem()
+    {
+        return false;
+    }
+    //Inventory::Prev Item
+    protected virtual bool GetPrevItem()
     {
         return false;
     }
@@ -60,5 +81,7 @@ public class Actor : MonoBehaviour
         if (GetUseTool() && tool != null) tool.Activate();
         int action = GetAction();
         if (action > 0 && selected != null) selected.DoMethod(this, action);
+        if (GetDrop()) inv.putDown(inv.getActive(), this.transform.position);
+        if (GetPickup()) inv.pickUp();
     }
 }
