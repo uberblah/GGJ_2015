@@ -8,7 +8,7 @@ public class Player : Actor {
 
     protected override Vector2 GetMove()
     {
-            return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     protected override Vector2 GetTarget()
@@ -33,6 +33,5 @@ public class Player : Actor {
     void Update()
     {
         base.Update();
-        FixedUpdate();
     }
 }

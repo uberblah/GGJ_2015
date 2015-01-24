@@ -58,7 +58,7 @@ public class Actor : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        Vector2 diff = GetTarget() - body.position;
-        body.rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
+        //Vector2 diff = GetTarget() - body.position;
+        //body.rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
     }
 }
