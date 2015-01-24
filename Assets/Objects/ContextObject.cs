@@ -1,18 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ContextObject : MonoBehaviour
 {
+    public delegate void ContextMethod(Actor a);
+
     public Camera                   cam;
     protected static ContextObject  curr;
     protected bool                  showMenu;
 
-    public string[]                 methods;
+    public Dictionary<string, ContextMethod> methods;
 
 	// Use this for initialization
 	void Start ()
     {
         showMenu = false;
+        // TEMPORARY
+        methods.Add("Test", Test);
 	}
 
     // Show menu
@@ -22,7 +27,16 @@ public class ContextObject : MonoBehaviour
         {
             Vector2 guiPos = cam.WorldToScreenPoint (this.transform.position);
             GUI.BeginGroup(new Rect(guiPos.x, guiPos.y, 100, 150));
-            GUI.Box(new Rect(0,0,100,150),"1. Test\n2.Test\n3.Test");
+            // Build list 
+            string list = "";
+            int i = 1;
+            foreach(string name in methods.Keys)
+            {
+                list += i + ". " + name + "\n";
+                i++;
+            }
+            // Show box
+            GUI.Box(new Rect(0,0,100,150),list);
             GUI.EndGroup();
         }
     }
@@ -47,7 +61,7 @@ public class ContextObject : MonoBehaviour
 	    
 	}
 
-    static void DoMethod(Player p, int method)
+    static void DoMethod(Actor a, int method)
     {
         ContextObject applyTo = curr;
     }
