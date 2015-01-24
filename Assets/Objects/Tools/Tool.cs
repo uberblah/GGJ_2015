@@ -11,10 +11,10 @@ public class Tool : MonoBehaviour
     public String toolName; //What's the tool called?
     public String toolDesc; //Short description of the tool
 
-    protected Rigidbody2D body; //The tool has to have a body!
+    public Rigidbody2D body; //The tool has to have a body!
 	
     #region Owner Stuff
-    protected Actor owner; // Who owns the tool?
+    public Actor owner; // Who owns the tool?
 
     // Does this tool have an owner?
     public bool isOwned()
