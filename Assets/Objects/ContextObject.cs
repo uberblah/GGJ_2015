@@ -16,6 +16,7 @@ public class ContextObject : MonoBehaviour
 	void Start ()
     {
         showMenu = false;
+        methods = new Dictionary<string, ContextMethod>();
         //TEMPORARY
         methods["Test1"] = this.DoTest;
         methods["Test2"] = this.DoTest;
