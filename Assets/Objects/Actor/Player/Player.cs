@@ -7,6 +7,10 @@ public class Player : Actor {
     public float force; // Force added on move
     public float cursorWeight = 0.25f; //weight of cursor in camera position
 
+    // Temporary
+    public GameObject   projectile;
+    static float        lastFire;
+
     protected override Vector2 GetMove()
     {
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -79,6 +83,17 @@ public class Player : Actor {
         view.transform.position = new Vector3(newpos.x, newpos.y, 0.0f);
         //Debug.Log("World mouse pos:" + view.ScreenToWorldPoint(Input.mousePosition).x + "," + view.ScreenToWorldPoint(Input.mousePosition).y);
         //Debug.Log("View mouse pos:" + Input.mousePosition.x + "," + Input.mousePosition.y);
+
+        // TEMPORARY: fire projectile
+        if (Input.GetAxisRaw("Fire1") > 0)
+        {
+            if (Time.time > lastFire + 1.0f)
+            {
+                Instantiate(projectile,this.transform.position,Quaternion.identity);
+                projectile.GetComponent<Projectile>().SetDirection(Vector2.right);
+                lastFire = Time.time;
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
