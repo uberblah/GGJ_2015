@@ -27,8 +27,8 @@ protected void GenerateRandWorld ()
     for (int y = 0; y<ySize; y++) { //And every down
     tiledLand [x, y] = new LandChunk ();
     //Determine the height from Perlin Noise
-    tiledLand [x, y].Height = Mathf.PerlinNoise ((float)Math.Abs (x / ((float)xSize) + (rand.NextDouble () - .5)),
-    (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - .5)));
+    tiledLand [x, y].Height = Mathf.PerlinNoise ((float)Math.Abs (x / ((float)xSize) + (rand.NextDouble () - rand.NextDouble())),
+    (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - rand.NextDouble())));
     tiledLand [x, y].DetermineForm (); //And let the land determine what itself is based on it's height.
     }
 
@@ -44,12 +44,12 @@ protected void GenerateRandWorld ()
     if (tiledLand[x,y].landType == LandChunk.landTypes.water)
     {
 	//GUI.DrawTexture(new Rect ((float)(x*10), (float)(y*10), 10f, 10f), NotLand);
-    //GUI.Label (new Rect ((float)x*15f, (float)y*15f, 15f, 15f), "W");
+    GUI.Label (new Rect ((float)x*15f, (float)y*15f, 15f, 15f), "W");
     }
     else
     {
 	//GUI.DrawTexture(new Rect ((float)(x*10), (float)(y*10), 10f, 10f), Land);
-    //GUI.Label (new Rect ((float)x*15f, (float)y*15f, 15f, 15f), "L");
+    GUI.Label (new Rect ((float)x*15f, (float)y*15f, 15f, 15f), "L");
     }
     }
     }
