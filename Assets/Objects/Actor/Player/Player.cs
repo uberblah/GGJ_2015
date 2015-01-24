@@ -21,12 +21,6 @@ public class Player : Actor {
 
     protected override int GetAction()
     {
-        /*
-        for (int i = 1; i < 10; i++)
-        {
-            if (Input.GetAxisRaw("Action" + i) > 0.0f) return i;
-        }
-         */
         if (Input.GetKeyDown(KeyCode.Alpha1)) return 1;
         if (Input.GetKeyDown(KeyCode.Alpha2)) return 2;
         if (Input.GetKeyDown(KeyCode.Alpha3)) return 3;
@@ -37,6 +31,26 @@ public class Player : Actor {
         if (Input.GetKeyDown(KeyCode.Alpha8)) return 8;
         if (Input.GetKeyDown(KeyCode.Alpha9)) return 9;
         return 0;
+    }
+    //Inventory::Pick Up Item
+    protected virtual bool GetPickup()
+    {
+        return Input.GetKeyDown(KeyCode.F);
+    }
+    //Inventory::Drop Current Item
+    protected virtual bool GetDrop()
+    {
+        return Input.GetKeyDown(KeyCode.G);
+    }
+    //Inventory::Next Item
+    protected virtual bool GetNextItem()
+    {
+        return Input.GetKeyDown(KeyCode.E);
+    }
+    //Inventory::Prev Item
+    protected virtual bool GetPrevItem()
+    {
+        return Input.GetKeyDown(KeyCode.Q);
     }
 
     protected override bool GetUseTool()
