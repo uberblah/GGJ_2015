@@ -1,17 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
-//TODO: SWITCH BULLETS TO USE ENERGY INSTEAD OF SOME MULTIPLIER
-//TODO: GO TO DESTRUCTIBLE, MAKE IT SUBTRACT THE ARMOR
-//TODO: MOVE WEAPON INFORMATION AND CALLS TO A WEAPONCONTROLLER CLASS
-//TODO: FIGURE OUT HOW TO REPRESENT A PLAYER WITH DIFFERENT WEAPONS
-
 public class Actor : MonoBehaviour
 {
     protected Rigidbody2D           body;
     protected CircleCollider2D      coll;
     protected LineRenderer          lnmkr;
     protected float                 forceMul;
+    protected float                 rotation;
 
     protected virtual Vector2 GetMove()
     {
@@ -58,7 +54,7 @@ public class Actor : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        //Vector2 diff = GetTarget() - body.position;
-        //body.rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
+        Vector2 diff = GetTarget() - body.position;
+        rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
     }
 }

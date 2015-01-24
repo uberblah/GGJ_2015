@@ -5,6 +5,7 @@ public class Player : Actor {
     public Camera view = null;
 
     public float force; // Force added on move
+    public float cursorWeight = 0.25f; //weight of cursor in camera position
 
     protected override Vector2 GetMove()
     {
@@ -35,10 +36,8 @@ public class Player : Actor {
         base.Update();
 
         Vector3 mousePos = view.ScreenToWorldPoint(Input.mousePosition);
-        const float plyWeight = 2; // Weight of player on the camera focus
-        view.transform.position = new Vector3(
-            ((transform.position.x / plyWeight) + mousePos.x / 2), ((transform.position.y / plyWeight) + mousePos.y / 2), 0);
-
+        Vector3 newpos = transform.position + ((mousePos - view.transform.position) * cursorWeight);
+        view.transform.position = new Vector3(newpos.x, newpos.y, 0.0f);
         Debug.Log("World mouse pos:" + view.ScreenToWorldPoint(Input.mousePosition).x + "," + view.ScreenToWorldPoint(Input.mousePosition).y);
         Debug.Log("View mouse pos:" + Input.mousePosition.x + "," + Input.mousePosition.y);
 
