@@ -10,7 +10,7 @@ public void Start ()
     toolDesc = "This is your basic stick, it whacks things";
 }
 
-protected override void Activate ()
+public override void Activate ()
 {
 base.Activate ();
     Vector2 vec = this.body.velocity;
@@ -19,4 +19,3 @@ base.Activate ();
 		                                     new Vector2 (vec.x+(float)(Math.Cos(rotat)*stickLength), (float)(Math.Sin(rotat)*stickLength)+vec.y));
 }
 }
-

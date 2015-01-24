@@ -11,10 +11,10 @@ public class Tool : MonoBehaviour
     public String toolName; //What's the tool called?
     public String toolDesc; //Short description of the tool
 
-    public Rigidbody2D body; //The tool has to have a body!
+    protected Rigidbody2D body; //The tool has to have a body!
 	
     #region Owner Stuff
-    public Actor owner; // Who owns the tool?
+    protected Actor owner; // Who owns the tool?
 
     // Does this tool have an owner?
     public bool isOwned()
@@ -33,7 +33,7 @@ public class Tool : MonoBehaviour
     }
     #endregion
 
-    protected virtual void Activate()
+    public virtual void Activate()
     {
     //This is the activate function, its use differs on the tool. A stick pokes, a torch burns.
     }
