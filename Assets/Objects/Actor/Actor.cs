@@ -44,8 +44,6 @@ public class Actor : MonoBehaviour
         if (body == null) Debug.Log(name + " failed to find its body!");
         coll = GetComponent<CircleCollider2D>();
         if (coll == null) Debug.Log(name + " failed to find its collider!");
-        lnmkr = GetComponent<LineRenderer>();
-        if (lnmkr == null) Debug.Log(name + " failed to fine its line renderer!");
     }
 
     protected virtual void FixedUpdate()

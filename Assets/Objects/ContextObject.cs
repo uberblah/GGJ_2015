@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ContextObject : MonoBehaviour
 {
-    public delegate void ContextMethod(Actor a);
+    public delegate void ContextMethod(Actor a, int idx);
 
     public Camera                   cam;
     public Player                   player;
@@ -63,11 +63,11 @@ public class ContextObject : MonoBehaviour
 
     public void DoMethod(Actor a, int method)
     {
-        methods[method - 1].Value(a);
+        if (method <= methods.Count) methods[method - 1].Value(a, method - 1);
     }
 
-    public void DoTest(Actor a)
+    public void DoTest(Actor a, int idx)
     {
-        Debug.Log(a.name + " called test in " + name);
+        Debug.Log(a.name + " called #" + idx + " in " + name);
     }
 }
