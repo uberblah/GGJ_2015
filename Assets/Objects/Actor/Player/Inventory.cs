@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory
 {
 	List<Item> items;
-	int currentlyActiveItem;
+	int currentlyActiveItem = 0;
 	bool usingItem;
 	public void Start()
 	{
@@ -26,7 +26,9 @@ public class Inventory
 
     public Item getActive()
     {
-        return items[currentlyActiveItem];
+        if (currentlyActiveItem < items.Count)
+            return items[currentlyActiveItem];
+        else return null;
     }
 
 	public void itemIsNowBeingUsed(Item i)
