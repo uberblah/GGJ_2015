@@ -8,7 +8,7 @@ public class Player : Actor {
 
     protected override Vector2 GetMove()
     {
-        return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     protected override Vector2 GetTarget()
