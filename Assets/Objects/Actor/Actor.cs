@@ -8,6 +8,11 @@ using System.Collections;
 
 public class Actor : Destructible
 {
+    protected Rigidbody2D           body;
+    protected CircleCollider2D      coll;
+    protected LineRenderer          lnmkr;
+    protected float                 forceMul;
+
     protected virtual Vector2 getMove()
     {
         return new Vector2(0.0f, 0.0f);
@@ -35,10 +40,8 @@ public class Actor : Destructible
     }
 
     // Update is called once per frame
-    protected override void Update()
+    protected virtual void Update()
     {
-        base.Update();
-
         Vector2 diff = getTarget() - body.position;
         body.rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
     }
