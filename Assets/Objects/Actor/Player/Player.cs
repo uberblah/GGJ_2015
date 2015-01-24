@@ -79,7 +79,6 @@ public class Player : Actor {
         view.transform.position = new Vector3(newpos.x, newpos.y, 0.0f);
         //Debug.Log("World mouse pos:" + view.ScreenToWorldPoint(Input.mousePosition).x + "," + view.ScreenToWorldPoint(Input.mousePosition).y);
         //Debug.Log("View mouse pos:" + Input.mousePosition.x + "," + Input.mousePosition.y);
-
     }
 
     void OnCollisionEnter2D(Collision2D col)
