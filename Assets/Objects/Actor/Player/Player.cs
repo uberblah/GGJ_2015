@@ -81,4 +81,14 @@ public class Player : Actor {
         //Debug.Log("View mouse pos:" + Input.mousePosition.x + "," + Input.mousePosition.y);
 
     }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        // Damage enemy on touch
+        Destructible enemyDes = col.gameObject.GetComponent<Destructible>();
+        if (enemyDes != null)
+        {
+            enemyDes.Damage(200);
+        }
+    }
 }

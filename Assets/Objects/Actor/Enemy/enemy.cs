@@ -15,7 +15,7 @@ public class enemy : Actor
     {
         base.Start();
         // Find first player
-        player = GameObject.FindGameObjectsWithTag("Player")[0];
+        player = GameObject.FindWithTag("Player");
         // Set force (public later?)
         forceMul = 10;
         // Set starting state
