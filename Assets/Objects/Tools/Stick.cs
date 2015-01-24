@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Stick : Tool
 {
-    public float stickLength; // How long is the stick?
+public float stickLength; // How long is the stick?
 public void Start ()
 {
     toolName = "Stick";
