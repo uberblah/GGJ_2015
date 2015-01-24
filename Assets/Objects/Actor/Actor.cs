@@ -13,28 +13,28 @@ public class Actor : MonoBehaviour
     protected LineRenderer          lnmkr;
     protected float                 forceMul;
 
-    protected virtual Vector2 getMove()
+    protected virtual Vector2 GetMove()
     {
         return new Vector2(0.0f, 0.0f);
     }
 
-    protected virtual Vector2 getTarget()
+    protected virtual Vector2 GetTarget()
     {
         return body.position + new Vector2(0.0f, 1.0f);
     }
 
-    protected virtual int getContextMethod()
+    protected virtual int GetContextMethod()
     {
         return 0;
     }
 
-    protected virtual bool getUseTool()
+    protected virtual bool GetUseTool()
     {
         return false;
     }
 
     //returns the index of the contexted method
-    protected virtual int getAction()
+    protected virtual int GetAction()
     {
         return 0;
     }

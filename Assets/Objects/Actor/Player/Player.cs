@@ -4,12 +4,12 @@ using System.Collections;
 public class Player : Actor {
     public Camera view = null;
 
-    protected override Vector2 getMove()
+    protected override Vector2 GetMove()
     {
         return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
-    protected override Vector2 getTarget()
+    protected override Vector2 GetTarget()
     {
         Vector2 mpos = Input.mousePosition;
         Vector3 mpos3 = view.ScreenToWorldPoint(new Vector3(mpos.x, mpos.y, 0.0f));
