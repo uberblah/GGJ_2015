@@ -60,7 +60,7 @@ public class ContextObject : MonoBehaviour
 
     public void DoMethod(Actor a, int method)
     {
-        methods.ToArray()[method].Value(a);
+        methods[method].Value(a);
     }
 
     public void DoTest(Actor a)

@@ -13,6 +13,22 @@ public class Inventory
 		List<Item> items = new List<Item> ();
 	}
 
+    public void rightShift()
+    {
+        currentlyActiveItem = (currentlyActiveItem + 1) % items.Count;
+    }
+
+    public void leftShift()
+    {
+        currentlyActiveItem--;
+        if (currentlyActiveItem <= 0) currentlyActiveItem = items.Count - 1;
+    }
+
+    public Item getActive()
+    {
+        return items[currentlyActiveItem];
+    }
+
 	public void itemIsNowBeingUsed(Item i)
 	{
 		currentlyActiveItem = items.IndexOf(i);
