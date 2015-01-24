@@ -10,12 +10,12 @@ void Start ()
     toolDesc = "This is your basic stick, it whacks things";
 }
 
-override void Activate ()
+protected override void Activate ()
 {
-base.Activate ();
-    Vector2 vec = this.body.GetVector;
-    float roatation = this.body.rotation;
-    body.AddForceAtPosition (new Vector2 (vec.x+(Math.Sin(rotatation)*stickLength), (Math.Cos(rotation)*stickLength)*vec.y));
+//base.Activate ();
+    //Vector2 vec = this.body.GetVector;
+    //float roatation = this.body.rotation;
+    //body.AddForceAtPosition (new Vector2 (vec.x+(Math.Sin(rotatation)*stickLength), (Math.Cos(rotation)*stickLength)*vec.y));
 }
 }
 

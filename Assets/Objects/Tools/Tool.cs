@@ -22,18 +22,18 @@ public class Tool : MonoBehaviour
     return owner != null;
     }
     // Give this tool an owner
-    virtual void giveOwner(Actor myNewOwner)
+    protected virtual void giveOwner(Actor myNewOwner)
     {
     owner = myNewOwner;
     }
     // Make this tool lack an owner
-    virtual void loseOwner(Actor ownerWhoDoesntWantMe)
+    protected virtual void loseOwner(Actor ownerWhoDoesntWantMe)
     {
     owner = null;
     }
     #endregion
 
-    virtual void Activate()
+    protected virtual void Activate()
     {
     //This is the activate function, its use differs on the tool. A stick pokes, a torch burns.
     }

@@ -33,5 +33,14 @@ public class Player : Actor {
     void Update()
     {
         base.Update();
+
+        Vector3 mousePos = view.ScreenToWorldPoint(Input.mousePosition);
+        const float plyWeight = 2; // Weight of player on the camera focus
+        view.transform.position = new Vector3(
+            ((transform.position.x / plyWeight) + mousePos.x / 2), ((transform.position.y / plyWeight) + mousePos.y / 2), 0);
+
+        Debug.Log("World mouse pos:" + view.ScreenToWorldPoint(Input.mousePosition).x + "," + view.ScreenToWorldPoint(Input.mousePosition).y);
+        Debug.Log("View mouse pos:" + Input.mousePosition.x + "," + Input.mousePosition.y);
+
     }
 }
