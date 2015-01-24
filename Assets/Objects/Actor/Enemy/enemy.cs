@@ -66,7 +66,7 @@ public class enemy : Actor
         // Change to chase after amount of time
         if (Time.time > lastSwitch + 4.0f)
             SwitchState(EnemyState.Chase);
-
+        // Do not move
         moveVec = Vector2.zero;
     }
 
