@@ -6,35 +6,35 @@ using System.Collections;
 //TODO: MOVE WEAPON INFORMATION AND CALLS TO A WEAPONCONTROLLER CLASS
 //TODO: FIGURE OUT HOW TO REPRESENT A PLAYER WITH DIFFERENT WEAPONS
 
-public class Actor : Destructible
+public class Actor : MonoBehaviour
 {
     protected Rigidbody2D           body;
     protected CircleCollider2D      coll;
     protected LineRenderer          lnmkr;
     protected float                 forceMul;
 
-    protected virtual Vector2 getMove()
+    protected virtual Vector2 GetMove()
     {
         return new Vector2(0.0f, 0.0f);
     }
 
-    protected virtual Vector2 getTarget()
+    protected virtual Vector2 GetTarget()
     {
         return body.position + new Vector2(0.0f, 1.0f);
     }
 
-    protected virtual int getContextMethod()
+    protected virtual int GetContextMethod()
     {
         return 0;
     }
 
-    protected virtual bool getUseTool()
+    protected virtual bool GetUseTool()
     {
         return false;
     }
 
     //returns the index of the contexted method
-    protected virtual int getAction()
+    protected virtual int GetAction()
     {
         return 0;
     }
