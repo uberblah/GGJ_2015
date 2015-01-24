@@ -5,16 +5,13 @@ public class Projectile : Actor
 {
     private Vector2     moveDir; // Movement direction
 
-    void SetDirection(Vector2 dir) { moveDir = dir; }
+    public void SetDirection(Vector2 dir) { moveDir = dir; }
 
     // Move in set direction
     protected override Vector2 GetMove()
     {
         // Make sure we have a direction set
-        if (moveDir != null)
-            return moveDir;
-        else
-            return Vector2.zero;
+        return moveDir;
     } 
 
 	// Use this for initialization
