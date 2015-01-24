@@ -63,8 +63,8 @@ public class enemy : Actor
 
     protected virtual void DoIdle()
     {
-        // Change to chase after amount of time
-        if (Time.time > lastSwitch + 4.0f)
+        // Chase player if he gets close
+        if (Vector2.Distance(transform.position, player.transform.position) < 10)
             SwitchState(EnemyState.Chase);
         // Do not move
         moveVec = Vector2.zero;
@@ -73,8 +73,8 @@ public class enemy : Actor
     protected virtual void DoChase()
     {
         // Change to retreat after amount of time
-        if(Time.time > lastSwitch + 4.0f)
-            SwitchState(EnemyState.Retreat);
+        //if(Time.time > lastSwitch + 4.0f)
+        //    SwitchState(EnemyState.Retreat);
         // Move us towards player
         moveVec = player.transform.position - transform.position;
     }
@@ -86,5 +86,12 @@ public class enemy : Actor
             SwitchState(EnemyState.Chase);
         // Move away from player
         moveVec = transform.position - player.transform.position;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        // Move back
+        if (col.gameObject != player)
+            SwitchState(EnemyState.Retreat);
     }
 }
