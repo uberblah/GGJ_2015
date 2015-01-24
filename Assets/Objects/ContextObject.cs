@@ -16,8 +16,6 @@ public class ContextObject : MonoBehaviour
 	void Start ()
     {
         showMenu = false;
-        // TEMPORARY
-        methods.Add("Test", Test);
 	}
 
     // Show menu

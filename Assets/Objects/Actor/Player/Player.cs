@@ -4,6 +4,8 @@ using System.Collections;
 public class Player : Actor {
     public Camera view = null;
 
+    public float force; // Force added on move
+
     protected override Vector2 getMove()
     {
         return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -24,5 +26,13 @@ public class Player : Actor {
             view = GetComponent<Camera>();
             if (view == null) Debug.Log(name + " failed to find its camera");
         }
+
+        forceMul = force;
+    }
+
+    void Update()
+    {
+        base.Update();
+        FixedUpdate();
     }
 }
