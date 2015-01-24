@@ -6,7 +6,7 @@ using System.Collections;
 //TODO: MOVE WEAPON INFORMATION AND CALLS TO A WEAPONCONTROLLER CLASS
 //TODO: FIGURE OUT HOW TO REPRESENT A PLAYER WITH DIFFERENT WEAPONS
 
-public class Actor : Destructible
+public class Actor : MonoBehaviour
 {
     protected Rigidbody2D           body;
     protected CircleCollider2D      coll;
