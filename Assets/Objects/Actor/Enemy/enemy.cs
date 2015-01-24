@@ -9,14 +9,14 @@ public class enemy : Actor
     protected override void Start()
     {
         base.Start();
-        player = GameObject.FindGameObjectsWithTag("Player")[0];
+        player = GameObject.FindGameObjectsWithTag("Player")[0]; // Find first player
         forceMul = 10;
 	}
 
     protected override Vector2 GetMove()
     {
         // Move towards player
-        return Vector2.MoveTowards(transform.position, player.transform.position, 1);
+        return player.transform.position - transform.position;
     }
 	
 	// Update is called once per frame
