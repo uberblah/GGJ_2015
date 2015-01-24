@@ -52,13 +52,13 @@ public class Actor : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        body.AddForce(forceMul * getMove().normalized);
+        body.AddForce(forceMul * GetMove().normalized);
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        Vector2 diff = getTarget() - body.position;
+        Vector2 diff = GetTarget() - body.position;
         body.rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
     }
 }
