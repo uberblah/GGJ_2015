@@ -12,8 +12,8 @@ using UnityEngine;
 
 public class Stick : Tool
 {
-	toolName = "Stick";
-	toolDesc = "This is your basic stick, of wood, it whacks things";
+	//toolName = "Stick";
+	//toolDesc = "This is your basic stick, of wood, it whacks things";
 
 }
 

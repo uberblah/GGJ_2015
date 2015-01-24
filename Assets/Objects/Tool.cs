@@ -22,18 +22,18 @@ public class Tool
     return owner != null;
     }
     // Give this tool an owner
-    virtual void giveOwner(Actor myNewOwner)
+    public virtual void giveOwner(Actor myNewOwner)
     {
     owner = myNewOwner;
     }
     // Make this tool lack an owner
-    virtual void loseOwner(Actor ownerWhoDoesntWantMe)
+    public virtual void loseOwner(Actor ownerWhoDoesntWantMe)
     {
     owner = null;
     }
     #endregion
 
-    virtual void Activate()
+    public virtual void Activate()
     {
     //This is the activate function, its use differs on the tool. A stick pokes, a torch burns.
     }
