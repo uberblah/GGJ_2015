@@ -6,10 +6,8 @@ public class Inventory
 {
 	List<Item> items;
 	int currentlyActiveItem = 0;
-	bool usingItem;
 	public void Start()
 	{
-		usingItem = false;
 		items = new List<Item> ();
 	}
 
@@ -34,7 +32,6 @@ public class Inventory
 	public void itemIsNowBeingUsed(Item i)
 	{
 		currentlyActiveItem = items.IndexOf(i);
-		usingItem = true;
 		i.itemNowBeingUsed ();
 	}
 
