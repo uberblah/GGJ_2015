@@ -21,7 +21,7 @@ public class Player : Actor {
 
     protected override int GetAction()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 1; i < 10; i++)
         {
             if (Input.GetAxisRaw("Action" + i) > 0.0f) return i;
         }
