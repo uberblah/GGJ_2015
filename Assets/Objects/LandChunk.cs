@@ -3,8 +3,8 @@ using UnityEngine;
 public class LandChunk
 {
 	public float Height;
-	enum landTypes {water, notWater};
-	landTypes landType;
+	public enum landTypes {water, notWater};
+	public landTypes landType;
 
 	public void DetermineForm()
 	{

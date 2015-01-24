@@ -26,5 +26,10 @@ public class World
 			}
 		}
 	}
+
+	public void DisplayWorld()
+	{
+
+	}
 }
 
