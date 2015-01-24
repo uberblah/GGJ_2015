@@ -3,8 +3,11 @@ using System.Collections;
 
 public class ContextObject : MonoBehaviour
 {
-    public Camera cam;
-    protected bool      showMenu;
+    public Camera                   cam;
+    protected static ContextObject  curr;
+    protected bool                  showMenu;
+
+    public string[]                 methods;
 
 	// Use this for initialization
 	void Start ()
@@ -17,7 +20,6 @@ public class ContextObject : MonoBehaviour
     {
         if (showMenu)
         {
-            //Camera camera = GameObject.Find("Main Camera");
             Vector2 guiPos = cam.WorldToScreenPoint (this.transform.position);
             GUI.BeginGroup(new Rect(guiPos.x, guiPos.y, 100, 150));
             GUI.Box(new Rect(0,0,100,150),"1. Test\n2.Test\n3.Test");
@@ -29,11 +31,14 @@ public class ContextObject : MonoBehaviour
     void OnMouseOver()
     {
         showMenu = true;
+        curr = this;
     }
 
     void OnMouseExit()
     {
         showMenu = false;
+        if (curr == this)
+            curr = null;
     }
 	
 	// Update is called once per frame
@@ -41,4 +46,9 @@ public class ContextObject : MonoBehaviour
     {
 	    
 	}
+
+    static void DoMethod(Player p, int method)
+    {
+        ContextObject applyTo = curr;
+    }
 }
