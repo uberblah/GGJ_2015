@@ -4,13 +4,13 @@ using UnityEngine;
 public class Stick : Tool
 {
     public float stickLength; // How long is the stick?
-void Start ()
+public void Start ()
 {
     toolName = "Stick";
     toolDesc = "This is your basic stick, it whacks things";
 }
 
-override void Activate ()
+protected override void Activate ()
 {
 base.Activate ();
     Vector2 vec = this.body.GetVector;
