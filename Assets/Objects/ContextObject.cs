@@ -4,23 +4,24 @@ using System.Collections.Generic;
 
 public class ContextObject : MonoBehaviour
 {
-    public delegate void ContextMethod(Actor a);
+    public delegate void ContextMethod(Actor a, int idx);
 
     public Camera                   cam;
+    public Player                   player;
     protected static ContextObject  curr;
     protected bool                  showMenu;
 
-    public Dictionary<string, ContextMethod> methods;
+    public List<KeyValuePair<string, ContextMethod>> methods;
 
 	// Use this for initialization
 	void Start ()
     {
         showMenu = false;
-        methods = new Dictionary<string, ContextMethod>();
+        methods = new List<KeyValuePair<string, ContextMethod>>();
         //TEMPORARY
-        methods["Test1"] = this.DoTest;
-        methods["Test2"] = this.DoTest;
-        methods["Test3"] = this.DoTest;
+        methods.Add(new KeyValuePair<string,ContextMethod>("Test 1", DoTest));
+        methods.Add(new KeyValuePair<string,ContextMethod>("Test 2", DoTest));
+        methods.Add(new KeyValuePair<string,ContextMethod>("Test 3", DoTest));
 	}
 
     // Show menu
@@ -28,14 +29,14 @@ public class ContextObject : MonoBehaviour
     {
         if (showMenu)
         {
-            Vector2 guiPos = cam.WorldToScreenPoint (this.transform.position);
+            Vector2 guiPos = cam.WorldToScreenPoint(this.transform.position);
             GUI.BeginGroup(new Rect(guiPos.x, guiPos.y, 100, 150));
             // Build list 
             string list = "";
             int i = 1;
-            foreach(string name in methods.Keys)
+            foreach (KeyValuePair<string, ContextMethod> m in methods)
             {
-                list += i + ". " + name + "\n";
+                list += i + ". " + m.Key + "\n";
                 i++;
             }
             // Show box
@@ -49,6 +50,7 @@ public class ContextObject : MonoBehaviour
     {
         showMenu = true;
         curr = this;
+        player.selected = this;
     }
 
     private void OnMouseExit()
@@ -56,15 +58,16 @@ public class ContextObject : MonoBehaviour
         showMenu = false;
         if (curr == this)
             curr = null;
+        if(player.selected == this) player.selected = null;
     }
 
-    public void DoMethod(Actor a, string method)
+    public void DoMethod(Actor a, int method)
     {
-        curr.methods[method](a);
+        if (method <= methods.Count) methods[method - 1].Value(a, method - 1);
     }
 
-    public void DoTest(Actor a)
+    public void DoTest(Actor a, int idx)
     {
-        Debug.Log(a.name + " called test in " + name);
+        Debug.Log(a.name + " called #" + idx + " in " + name);
     }
 }

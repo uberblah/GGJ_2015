@@ -8,6 +8,8 @@ public class Actor : MonoBehaviour
     protected LineRenderer          lnmkr;
     protected float                 forceMul;
     protected float                 rotation;
+    protected Inventory             inv;
+    public    ContextObject         selected = null;
 
     protected virtual Vector2 GetMove()
     {
@@ -24,12 +26,33 @@ public class Actor : MonoBehaviour
         return 0;
     }
 
+    //Inventory::Use Current Tool
     protected virtual bool GetUseTool()
     {
         return false;
     }
+    //Inventory::Pick Up Item
+    protected virtual bool GetPickup()
+    {
+        return false;
+    }
+    //Inventory::Drop Current Item
+    protected virtual bool GetDrop()
+    {
+        return false;
+    }
+    //Inventory::Next Item
+    protected virtual bool GetNextItem()
+    {
+        return false;
+    }
+    //Inventory::Prev Item
+    protected virtual bool GetPrevItem()
+    {
+        return false;
+    }
 
-    //returns the index of the contexted method
+    //returns the index of the contexted method to call
     protected virtual int GetAction()
     {
         return 0;
@@ -38,12 +61,12 @@ public class Actor : MonoBehaviour
     // Use this for initialization
     protected virtual void Start()
     {
+        inv = new Inventory();
+        inv.Start();
         body = GetComponent<Rigidbody2D>();
         if (body == null) Debug.Log(name + " failed to find its body!");
         coll = GetComponent<CircleCollider2D>();
         if (coll == null) Debug.Log(name + " failed to find its collider!");
-        lnmkr = GetComponent<LineRenderer>();
-        if (lnmkr == null) Debug.Log(name + " failed to fine its line renderer!");
     }
 
     protected virtual void FixedUpdate()
@@ -56,5 +79,12 @@ public class Actor : MonoBehaviour
     {
         Vector2 diff = GetTarget() - body.position;
         rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
+        Tool tool = inv.getActive() as Tool;
+        if (GetUseTool() && tool != null) tool.Activate();
+        int action = GetAction();
+        if (action > 0 && selected != null) selected.DoMethod(this, action);
+        if (GetDrop()) inv.putDown(inv.getActive(), this.transform.position);
+        //TODO: FIND NEAREST OBJECT
+        if (GetPickup()) inv.pickUp(Item.findNearestDropped(transform.position));
     }
 }
