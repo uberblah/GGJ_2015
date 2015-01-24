@@ -7,6 +7,7 @@ public class ContextObject : MonoBehaviour
     public delegate void ContextMethod(Actor a);
 
     public Camera                   cam;
+    public Player                   player;
     protected static ContextObject  curr;
     protected bool                  showMenu;
 
@@ -49,6 +50,7 @@ public class ContextObject : MonoBehaviour
     {
         showMenu = true;
         curr = this;
+        player.selected = this;
     }
 
     private void OnMouseExit()
@@ -56,11 +58,12 @@ public class ContextObject : MonoBehaviour
         showMenu = false;
         if (curr == this)
             curr = null;
+        if(player.selected == this) player.selected = null;
     }
 
     public void DoMethod(Actor a, int method)
     {
-        methods[method].Value(a);
+        methods[method - 1].Value(a);
     }
 
     public void DoTest(Actor a)

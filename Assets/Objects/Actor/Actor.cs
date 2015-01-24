@@ -9,7 +9,7 @@ public class Actor : MonoBehaviour
     protected float                 forceMul;
     protected float                 rotation;
     protected Tool                  tool = null;
-    protected ContextObject         selected = null;
+    public    ContextObject         selected = null;
 
     protected virtual Vector2 GetMove()
     {
