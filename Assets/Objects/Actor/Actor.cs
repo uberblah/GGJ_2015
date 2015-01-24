@@ -85,6 +85,6 @@ public class Actor : MonoBehaviour
         if (action > 0 && selected != null) selected.DoMethod(this, action);
         if (GetDrop()) inv.putDown(inv.getActive(), this.transform.position);
         //TODO: FIND NEAREST OBJECT
-        //if (GetPickup()) inv.pickUp();
+        if (GetPickup()) inv.pickUp(Item.findNearestDropped(transform.position));
     }
 }
