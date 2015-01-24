@@ -15,7 +15,7 @@ protected override void Activate ()
 base.Activate ();
     Vector2 vec = this.body.GetVector;
     float roatation = this.body.rotation;
-    body.AddForceAtPosition (new Vector2 (vec.x+(Math.Sin(rotatation)*stickLength), (Math.Cos(rotation)*stickLength)*vec.y));
+    body.AddForceAtPosition (new Vector2 (vec.x+(Math.Cos(rotatation)*stickLength), (Math.Sin(rotation)*stickLength)*vec.y));
 }
 }
 
