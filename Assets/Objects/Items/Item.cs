@@ -26,7 +26,7 @@ public class Item : MonoBehaviour
 	}
 	#endregion
 
-	public void Start()
+	public virtual void Start()
 	{
 		beingUsed = false;
 	}

@@ -10,8 +10,6 @@ public class Tool : Item
 {
     public String toolName; //What's the tool called?
     public String toolDesc; //Short description of the tool
-
-    protected Rigidbody2D body; //The tool has to have a body!
 	
 
 
