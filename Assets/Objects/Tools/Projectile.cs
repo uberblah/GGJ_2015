@@ -19,7 +19,7 @@ public class Projectile : Actor
     {
         base.Start();
 
-        forceMul = 50;
+        forceMul = 300;
         moveDir = Vector2.right;
 	}
 	

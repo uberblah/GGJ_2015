@@ -87,7 +87,7 @@ public class Player : Actor {
         // TEMPORARY: fire projectile
         if (Input.GetAxisRaw("Fire1") > 0)
         {
-            if (Time.time > lastFire + 1.0f)
+            if (Time.time > lastFire + 0.5f)
             {
                 Instantiate(projectile,this.transform.position,Quaternion.identity);
                 projectile.GetComponent<Projectile>().SetDirection(Vector2.right);
