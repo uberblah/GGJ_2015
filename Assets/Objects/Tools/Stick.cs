@@ -4,7 +4,7 @@ using UnityEngine;
 public class Stick : Tool
 {
 public float stickLength; // How long is the stick?
-public void Start ()
+public override void Start ()
 {
     toolName = "Stick";
     toolDesc = "This is your basic stick, it whacks things";
