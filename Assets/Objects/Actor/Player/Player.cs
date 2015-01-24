@@ -31,7 +31,7 @@ public class Player : Actor {
         forceMul = force;
     }
 
-    void Update()
+    protected override void Update()
     {
         base.Update();
 
