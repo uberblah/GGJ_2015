@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : Actor {
+public class Player : Actor
+{
     public Camera view = null;
 
     public float force; // Force added on move
     public float cursorWeight = 0.25f; //weight of cursor in camera position
 
     private float       lastToolUse; // Last time we used tool
-    private Tool        currentTool; // Tool we're currently using
 
     protected override Vector2 GetMove()
     {
@@ -69,8 +69,9 @@ public class Player : Actor {
             view = GetComponent<Camera>();
             if (view == null) Debug.Log(name + " failed to find its camera");
         }
-
+        // Set initial values
         forceMul = force;
+        lastToolUse = Time.time;
     }
 
     protected override void Update()
@@ -84,11 +85,12 @@ public class Player : Actor {
         //Debug.Log("View mouse pos:" + Input.mousePosition.x + "," + Input.mousePosition.y);
 
         // Use a tool
-        if (GetUseTool() && currentTool != null) // Make sure tool is valid
+        Tool active = inv.GetActive() as Tool; // Make item a tool
+        if (GetUseTool() && active != null) // Make sure item is a tool
         {
-            if (Time.time > lastToolUse + currentTool.GetDelay())
+            if (Time.time > lastToolUse + active.GetDelay())
             {
-                currentTool.Activate();
+                active.Activate();
             }
         }
     }

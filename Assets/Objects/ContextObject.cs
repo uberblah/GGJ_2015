@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+/*
+ * Context object
+ * Can be hovered over to show GUI menu and perform actions
+ */
 
 public class ContextObject : MonoBehaviour
 {

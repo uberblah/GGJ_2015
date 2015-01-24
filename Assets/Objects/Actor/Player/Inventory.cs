@@ -1,50 +1,54 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+/*
+ * Inventory of items
+ */
 
 public class Inventory
 {
-	List<Item> items;
-	int currentlyActiveItem = 0;
+	List<Item>  items;
+	int         currentlyActiveItem = 0;
+
 	public void Start()
 	{
 		items = new List<Item> ();
 	}
 
-    public void rightShift()
+    public void RightShift()
     {
         currentlyActiveItem = (currentlyActiveItem + 1) % items.Count;
     }
 
-    public void leftShift()
+    public void LeftShift()
     {
         currentlyActiveItem--;
         if (currentlyActiveItem <= 0) currentlyActiveItem = items.Count - 1;
     }
 
-    public Item getActive()
+    public Item GetActive()
     {
         if (currentlyActiveItem < items.Count)
             return items[currentlyActiveItem];
         else return null;
     }
 
-	public void itemIsNowBeingUsed(Item i)
+	public void ItemIsNowBeingUsed(Item i)
 	{
 		currentlyActiveItem = items.IndexOf(i);
-		i.itemNowBeingUsed ();
+		i.ItemNowBeingUsed ();
 	}
 
-	public void pickUp(Item i)
+	public void PickUp(Item i)
 	{
 		items.Add (i);
-		i.itemPickedUp ();
+		i.ItemPickedUp ();
 	}
 
-	public void putDown(Item i, Vector2 LocationPutDown)
+	public void PutDown(Item i, Vector2 LocationPutDown)
 	{
 		items.Remove (i);
-		i.itemDrop (LocationPutDown);
+		i.ItemDrop (LocationPutDown);
 	}
 }
 

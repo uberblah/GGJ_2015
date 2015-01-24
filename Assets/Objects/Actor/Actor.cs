@@ -79,12 +79,12 @@ public class Actor : MonoBehaviour
     {
         Vector2 diff = GetTarget() - body.position;
         rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
-        Tool tool = inv.getActive() as Tool;
+        Tool tool = inv.GetActive() as Tool;
         if (GetUseTool() && tool != null) tool.Activate();
         int action = GetAction();
         if (action > 0 && selected != null) selected.DoMethod(this, action);
-        if (GetDrop()) inv.putDown(inv.getActive(), this.transform.position);
+        if (GetDrop()) inv.PutDown(inv.GetActive(), this.transform.position);
         //TODO: FIND NEAREST OBJECT
-        if (GetPickup()) inv.pickUp(Item.findNearestDropped(transform.position));
+        if (GetPickup()) inv.PickUp(Item.FindNearestDropped(transform.position));
     }
 }
