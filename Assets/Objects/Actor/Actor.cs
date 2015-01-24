@@ -8,7 +8,7 @@ public class Actor : MonoBehaviour
     protected LineRenderer          lnmkr;
     protected float                 forceMul;
     protected float                 rotation;
-    protected Tool                  tool = null;
+    protected Inventory             inv;
     public    ContextObject         selected = null;
 
     protected virtual Vector2 GetMove()
@@ -31,7 +31,7 @@ public class Actor : MonoBehaviour
         return false;
     }
 
-    //returns the index of the contexted method
+    //returns the index of the contexted method to call
     protected virtual int GetAction()
     {
         return 0;
@@ -56,6 +56,7 @@ public class Actor : MonoBehaviour
     {
         Vector2 diff = GetTarget() - body.position;
         rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
+        Tool tool = inv.getActive() as Tool;
         if (GetUseTool() && tool != null) tool.Activate();
         int action = GetAction();
         if (action > 0 && selected != null) selected.DoMethod(this, action);
