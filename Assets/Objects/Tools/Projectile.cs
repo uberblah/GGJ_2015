@@ -22,6 +22,7 @@ public class Projectile : Actor
     {
         base.Start();
 
+        forceMul = 50;
         moveDir = Vector2.right;
 	}
 	
@@ -38,6 +39,7 @@ public class Projectile : Actor
         if (objDes != null)
         {
             objDes.Damage(200);
+            Destroy(gameObject);
         }
     }
 }
