@@ -6,7 +6,8 @@ public class World : MonoBehaviour
 private int xSize, ySize; //How big is the world?
 public string worldName; //Name of the planet
 public LandChunk[,] tiledLand; //This is the grid of land, X,Y cooridinates for that chunk of land.
-System.Random rand;
+private System.Random rand;
+public Texture2D Land, NotLand;
 
 public void Start ()
 {
@@ -17,6 +18,8 @@ public void Start ()
     worldName = "Unknown World"; //You have a better name?
     rand = new System.Random ();
     GenerateRandWorld (); //Let there be light!!\
+
+    
 }
 protected void GenerateRandWorld ()
     {
@@ -28,9 +31,10 @@ protected void GenerateRandWorld ()
     (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - .5)));
     tiledLand [x, y].DetermineForm (); //And let the land determine what itself is based on it's height.
     }
+
     }
 }
-    /* Un comment if you want your gui showing the randomly gen'd world
+	/*
     protected void OnGUI()
     {
     for (int x = 0; x < xSize; x++) //For Every land across
@@ -39,15 +43,16 @@ protected void GenerateRandWorld ()
     {
     if (tiledLand[x,y].landType == LandChunk.landTypes.water)
     {
-    GUI.Label (new Rect ((float)x*15f, (float)y*15f, 15f, 15f), "W");
+	//GUI.DrawTexture(new Rect ((float)(x*10), (float)(y*10), 10f, 10f), NotLand);
+    //GUI.Label (new Rect ((float)x*15f, (float)y*15f, 15f, 15f), "W");
     }
     else
     {
-    GUI.Label (new Rect ((float)x*15f, (float)y*15f, 15f, 15f), "L");
+	//GUI.DrawTexture(new Rect ((float)(x*10), (float)(y*10), 10f, 10f), Land);
+    //GUI.Label (new Rect ((float)x*15f, (float)y*15f, 15f, 15f), "L");
     }
     }
     }
-    }
-*/
+    }*/
 }
 
