@@ -23,6 +23,22 @@ public class Actor : Destructible
         return body.position + new Vector2(0.0f, 1.0f);
     }
 
+    protected virtual int getContextMethod()
+    {
+        return 0;
+    }
+
+    protected virtual bool getUseTool()
+    {
+        return false;
+    }
+
+    //returns the index of the contexted method
+    protected virtual int getAction()
+    {
+        return 0;
+    }
+
     // Use this for initialization
     protected virtual void Start()
     {
