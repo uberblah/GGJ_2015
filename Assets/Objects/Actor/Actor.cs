@@ -8,6 +8,8 @@ public class Actor : MonoBehaviour
     protected LineRenderer          lnmkr;
     protected float                 forceMul;
     protected float                 rotation;
+    protected Tool                  tool = null;
+    protected ContextObject         selected = null;
 
     protected virtual Vector2 GetMove()
     {
@@ -56,5 +58,8 @@ public class Actor : MonoBehaviour
     {
         Vector2 diff = GetTarget() - body.position;
         rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
+        if (GetUseTool() && tool != null) tool.Activate();
+        int action = GetAction();
+        if (action > 0 && selected != null) selected.DoMethod(this, action);
     }
 }

@@ -10,17 +10,17 @@ public class ContextObject : MonoBehaviour
     protected static ContextObject  curr;
     protected bool                  showMenu;
 
-    public Dictionary<string, ContextMethod> methods;
+    public List<KeyValuePair<string, ContextMethod>> methods;
 
 	// Use this for initialization
 	void Start ()
     {
         showMenu = false;
-        methods = new Dictionary<string, ContextMethod>();
+        methods = new List<KeyValuePair<string, ContextMethod>>();
         //TEMPORARY
-        methods["Test1"] = this.DoTest;
-        methods["Test2"] = this.DoTest;
-        methods["Test3"] = this.DoTest;
+        methods.Add(new KeyValuePair<string,ContextMethod>("Test 1", DoTest));
+        methods.Add(new KeyValuePair<string,ContextMethod>("Test 2", DoTest));
+        methods.Add(new KeyValuePair<string,ContextMethod>("Test 3", DoTest));
 	}
 
     // Show menu
@@ -28,14 +28,14 @@ public class ContextObject : MonoBehaviour
     {
         if (showMenu)
         {
-            Vector2 guiPos = cam.WorldToScreenPoint (this.transform.position);
+            Vector2 guiPos = cam.WorldToScreenPoint(this.transform.position);
             GUI.BeginGroup(new Rect(guiPos.x, guiPos.y, 100, 150));
             // Build list 
             string list = "";
             int i = 1;
-            foreach(string name in methods.Keys)
+            foreach (KeyValuePair<string, ContextMethod> m in methods)
             {
-                list += i + ". " + name + "\n";
+                list += i + ". " + m.Key + "\n";
                 i++;
             }
             // Show box
@@ -58,9 +58,9 @@ public class ContextObject : MonoBehaviour
             curr = null;
     }
 
-    public void DoMethod(Actor a, string method)
+    public void DoMethod(Actor a, int method)
     {
-        curr.methods[method](a);
+        methods.ToArray()[method].Value(a);
     }
 
     public void DoTest(Actor a)
