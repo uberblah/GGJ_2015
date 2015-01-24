@@ -33,22 +33,22 @@ public class Player : Actor {
         return 0;
     }
     //Inventory::Pick Up Item
-    protected virtual bool GetPickup()
+    protected override bool GetPickup()
     {
         return Input.GetKeyDown(KeyCode.F);
     }
     //Inventory::Drop Current Item
-    protected virtual bool GetDrop()
+    protected override bool GetDrop()
     {
         return Input.GetKeyDown(KeyCode.G);
     }
     //Inventory::Next Item
-    protected virtual bool GetNextItem()
+    protected override bool GetNextItem()
     {
         return Input.GetKeyDown(KeyCode.E);
     }
     //Inventory::Prev Item
-    protected virtual bool GetPrevItem()
+    protected override bool GetPrevItem()
     {
         return Input.GetKeyDown(KeyCode.Q);
     }
