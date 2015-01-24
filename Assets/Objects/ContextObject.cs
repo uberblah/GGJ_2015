@@ -16,8 +16,10 @@ public class ContextObject : MonoBehaviour
 	void Start ()
     {
         showMenu = false;
-        // TEMPORARY
-        methods.Add("Test", Test);
+        //TEMPORARY
+        methods["Test1"] = this.DoTest;
+        methods["Test2"] = this.DoTest;
+        methods["Test3"] = this.DoTest;
 	}
 
     // Show menu
@@ -42,27 +44,26 @@ public class ContextObject : MonoBehaviour
     }
 
     // Show menu on mouse over
-    void OnMouseOver()
+    private void OnMouseOver()
     {
         showMenu = true;
         curr = this;
     }
 
-    void OnMouseExit()
+    private void OnMouseExit()
     {
         showMenu = false;
         if (curr == this)
             curr = null;
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	    
-	}
 
-    static void DoMethod(Actor a, int method)
+    public void DoMethod(Actor a, string method)
     {
-        ContextObject applyTo = curr;
+        curr.methods[method](a);
+    }
+
+    public void DoTest(Actor a)
+    {
+        Debug.Log(a.name + " called test in " + name);
     }
 }
