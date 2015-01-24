@@ -10,6 +10,11 @@ public void Start ()
     toolDesc = "This is your basic stick, it whacks things";
 }
 
+public void setStickLength(float newLength)
+{
+stickLength = newLength;
+}
+
 public override void Activate ()
 {
 base.Activate ();
