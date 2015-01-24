@@ -4,7 +4,7 @@ using System.Collections;
 public class Actor : MonoBehaviour
 {
     protected Rigidbody2D           body;
-    protected CircleCollider2D      coll;
+    protected Collider2D            coll;
     protected LineRenderer          lnmkr;
     protected float                 forceMul;
     protected float                 rotation;
@@ -65,7 +65,7 @@ public class Actor : MonoBehaviour
         inv.Start();
         body = GetComponent<Rigidbody2D>();
         if (body == null) Debug.Log(name + " failed to find its body!");
-        coll = GetComponent<CircleCollider2D>();
+        coll = GetComponent<Collider2D>();
         if (coll == null) Debug.Log(name + " failed to find its collider!");
     }
 
