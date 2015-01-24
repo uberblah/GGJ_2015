@@ -3,22 +3,25 @@ using System.Collections;
 
 public class enemy : Actor
 {
+    private GameObject player;
 
 	// Use this for initialization
-	void Start ()
+    protected override void Start()
     {
-        forceMul = 1.5f;
+        base.Start();
+        player = GameObject.FindGameObjectsWithTag("Player")[0];
+        forceMul = 10;
 	}
 
     protected override Vector2 GetMove()
     {
         // Move towards player
-        GameObject player = GameObject.Find("Player");
-        return Vector2.MoveTowards(transform.position, player.transform.position, 10);
+        return Vector2.MoveTowards(transform.position, player.transform.position);
     }
 	
 	// Update is called once per frame
 	void Update ()
-    { 
+    {
+        base.Update();
 	}
 }
