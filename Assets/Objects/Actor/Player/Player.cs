@@ -97,8 +97,6 @@ public class Player : Actor
         initialScale = transform.localScale;
         anim = GetComponent<Animator>();
         aSource = GetComponent<AudioSource>();
-        // Hide gameover text
-        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         // Hide mouse cursor
         Screen.showCursor = false;
     }
@@ -291,8 +289,11 @@ public class Player : Actor
         {
             GetComponent<SpriteRenderer>().enabled = false;
             // Show game over text
-            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-            transform.localScale = initialScale;
+            foreach (Transform child in view.transform)
+            {
+                if (child.name == "Game Over")
+                    child.GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
     }
 
