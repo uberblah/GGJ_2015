@@ -13,6 +13,7 @@ MonoImporter:
   - rarePart: {fileID: 108420, guid: fa5ec89b22434f94bb31682fabc6d361, type: 2}
   - Rock: {fileID: 128586, guid: 4124363900ff08b4f8f2c2c585d3483c, type: 2}
   - Tree: {fileID: 162634, guid: 013058969b056b44a9a91e466a0b8360, type: 2}
+  - Enemy: {fileID: 122904, guid: 31cc5b6be9d9eb74da9750c3f2a72d9a, type: 2}
   - player: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
