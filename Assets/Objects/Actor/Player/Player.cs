@@ -25,6 +25,9 @@ public class Player : Actor
 
     public Texture2D    crosshair; // Custom crosshair
 
+    // For map generation
+    public World        theWorld;
+
     protected override Vector2 GetMove()
     {
         // Don't move if dead
