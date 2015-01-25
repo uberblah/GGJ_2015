@@ -19,8 +19,8 @@ public class LaserGun : Tool
     {
         if (projectile != null)
         {
-            Instantiate(projectile, owner.transform.position, Quaternion.identity); // Shoot from parent, not where we are
-            projectile.GetComponent<Projectile>().SetDirection(Vector2.right);
+            GameObject newProj = (GameObject)Instantiate(projectile, owner.transform.position, Quaternion.identity); // Shoot from parent, not where we are
+            newProj.GetComponent<Projectile>().SetDirection(Vector2.right);
             // Play sound
             audio.Play();
         }

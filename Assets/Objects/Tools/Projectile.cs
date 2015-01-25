@@ -10,7 +10,6 @@ public class Projectile : Actor
     // Move in set direction
     protected override Vector2 GetMove()
     {
-        // Make sure we have a direction set
         return moveDir;
     } 
 
@@ -20,7 +19,6 @@ public class Projectile : Actor
         base.Start();
 
         forceMul = 300;
-        moveDir = Vector2.right;
 	}
 	
 	// Update is called once per frame
