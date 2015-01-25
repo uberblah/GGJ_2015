@@ -26,6 +26,10 @@ public class MainMenu : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            timer = Time.time;
+        }
         if (timer < Time.time)
         {
             if (fadeout)
@@ -35,7 +39,6 @@ public class MainMenu : MonoBehaviour
                 if (stage == strings.Length - 1)
                 {
                     conclusion.text = strings[stage];
-                    conclusion.color = new Color(conclusion.color.r, conclusion.color.g, conclusion.color.b, 1.0f);
                     logo.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                 }
                 else
