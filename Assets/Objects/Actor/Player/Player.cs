@@ -156,6 +156,9 @@ public class Player : Actor
 
             if (GetUseTool())
             {
+                // Drop the tooltip
+                MoveTooltip tt = GetComponentInChildren<MoveTooltip>();
+                if (tt != null) Destroy(tt);
                 // Shoot animation
                 anim.CrossFade("Shoot", 0f);
                 // Face towards mouse cursor
@@ -205,9 +208,6 @@ public class Player : Actor
         int cursorSizeX = 64;
         int cursorSizeY = 64;
         GUI.DrawTexture(new Rect(Input.mousePosition.x - cursorSizeX, (Screen.height - Input.mousePosition.y) - cursorSizeY, cursorSizeX, cursorSizeY), crosshair);
-
-		// Show Instructions
-		GUI.Box (new Rect (Screen.width / 2, Screen.height - 50, 300, 20), "WASD to move, Mouse to fire");
 
         // Show active object, temporary?
         if(inv.GetActive() != null)
