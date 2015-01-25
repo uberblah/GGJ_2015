@@ -243,9 +243,9 @@ public class Player : Actor
         if (GetComponent<Destructible>().GetDead())
         {
             GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<Collider2D>().enabled = false;
             // Show game over text
             transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+            transform.localScale = initialScale;
         }
     }
 
