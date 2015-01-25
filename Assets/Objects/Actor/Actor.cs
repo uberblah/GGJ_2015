@@ -52,6 +52,12 @@ public class Actor : MonoBehaviour
         return false;
     }
 
+    //Inventory: Give us item
+    public virtual void GiveItem(Item i)
+    {
+        inv.PickUp(i);
+    }
+
     //returns the index of the contexted method to call
     protected virtual int GetAction()
     {

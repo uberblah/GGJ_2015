@@ -7,7 +7,7 @@ public class Item : ContextObject
 
 	protected Rigidbody2D   body; //Object Body
 	protected float         value; // Assumed to be a random value to the object, either how much it contributes to a task or goal
-	public bool             beingUsed; // Is it being used punk?
+	private bool            beingUsed; // Is it being used punk?
 
 	#region Owner Stuff
 	protected Actor owner; // Who owns the tool?

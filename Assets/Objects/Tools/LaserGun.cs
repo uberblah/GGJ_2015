@@ -10,12 +10,21 @@ public class LaserGun : Tool
         base.Start();
     }
 
+    public void Update()
+    {
+        showMenu = false; // Temporary
+    }
+
     public override void Activate()
     {
         if (projectile != null)
         {
-            Instantiate(projectile, this.transform.position, Quaternion.identity);
+            Instantiate(projectile, owner.transform.position, Quaternion.identity); // Shoot from parent, not where we are
             projectile.GetComponent<Projectile>().SetDirection(Vector2.right);
+        }
+        else
+        {
+            Debug.Log("Projectile not set for laser gun");
         }
     }
 }

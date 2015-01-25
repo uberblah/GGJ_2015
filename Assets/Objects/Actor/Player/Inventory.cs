@@ -17,13 +17,16 @@ public class Inventory
 
     public void RightShift()
     {
-        currentlyActiveItem = (currentlyActiveItem + 1) % items.Count;
+        currentlyActiveItem = (currentlyActiveItem + 1);
+        if (currentlyActiveItem >= items.Count)
+            currentlyActiveItem = 0;
     }
 
     public void LeftShift()
     {
         currentlyActiveItem--;
-        if (currentlyActiveItem <= 0) currentlyActiveItem = items.Count - 1;
+        if (currentlyActiveItem < 0)
+            currentlyActiveItem = items.Count - 1;
     }
 
     public Item GetActive()

@@ -84,15 +84,31 @@ public class Player : Actor
         //Debug.Log("World mouse pos:" + view.ScreenToWorldPoint(Input.mousePosition).x + "," + view.ScreenToWorldPoint(Input.mousePosition).y);
         //Debug.Log("View mouse pos:" + Input.mousePosition.x + "," + Input.mousePosition.y);
 
+        // Cycle items
+        if (GetNextItem())
+        {
+            inv.RightShift();
+        }
+        if (GetPrevItem())
+        {
+            inv.LeftShift();
+        }
+        
         // Use a tool
         Tool active = inv.GetActive() as Tool; // Make item a tool
-        if (GetUseTool() && active != null) // Make sure item is a tool
+        if (GetUseTool() && active != null // Make sure item is a tool
+            && Time.time > lastToolUse + active.GetDelay()) // Use delay
         {
-            if (Time.time > lastToolUse + active.GetDelay())
-            {
-                active.Activate();
-            }
+            active.Activate();
+            lastToolUse = Time.time;
         }
+    }
+
+    public void OnGUI()
+    {
+        // Show active object, temporary?
+        if(inv.GetActive() != null)
+            GUI.Box(new Rect(0, 0, 200, 20), "Active item: " + inv.GetActive().gameObject.name);
     }
 
     void OnCollisionEnter2D(Collision2D col)
