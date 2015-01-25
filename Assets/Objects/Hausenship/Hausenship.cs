@@ -8,6 +8,7 @@ public class Hausenship : MonoBehaviour
     public float climb = 10.0f;
     public float decay = -0.1f;
     public float floor = -10.0f;
+    public float ceil = 10.0f;
     public string crashScene = "crash";
 
     void Update()
