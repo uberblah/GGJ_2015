@@ -90,6 +90,7 @@ public class World : MonoBehaviour
                         float noiseValue = Mathf.PerlinNoise(fineSeed + fineVariability * (float)fineX / (float)fineSize, fineSeed + fineVariability * (float)fineY / (float)fineSize); // create noise
                         noiseValue = noiseValue * .25f; // at most .25 different
                         float heiHei = thisOffset + noiseValue;
+                        tiledLand[xCoord, yCoord] = heiHei;
                         if (heiHei < waterCutoff)
                         {
 							TiTi = (GameObject)Instantiate(WateryTile);
