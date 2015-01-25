@@ -49,5 +49,9 @@ public void DetermineForm()
 	
 	public void Update()
 	{
+		if (!renderer.isVisible) 
+		{
+
+		}
 	}
 }
