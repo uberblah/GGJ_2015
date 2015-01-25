@@ -20,10 +20,6 @@ public void Start ()
     rand = new System.Random ();
     GenerateRandWorld (); //Let there be light!!
 }
-public bool passableTile(Vector2 v)
-{
-		return (tiledLand [v.x / xSize, v.y / ySize].landType == LandChunk.landTypes.notWater);
-}
 protected void GenerateRandWorld ()
     {
 		GameObject TiTi;
@@ -31,7 +27,6 @@ protected void GenerateRandWorld ()
     for (int y = 0; y<ySize; y++) { //And every down
     //Determine the height from Perlin Noise //And let the land determine what itself is based on it's height.
 	float heiHei = Mathf.PerlinNoise ((float)Math.Abs (x / ((float)xSize) + (rand.NextDouble () - rand.NextDouble())*.75f), (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - rand.NextDouble())*.75f));
-	tiledLand[x,y].Height = heiHei;
 	if (heiHei >= .20)
 {
 	TiTi = (GameObject) Instantiate(Tile);
