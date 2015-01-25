@@ -4,7 +4,7 @@ using System.Collections;
 public class Hausenship : MonoBehaviour
 {
     public Camera cam;
-    public AudioSource audio;
+    public AudioClip crash;
     public Vector3 camOffset = new Vector3(0.0f, 0.0f, -5.0f);
     public float climb = 10.0f;
     public float decay = -0.1f;
@@ -14,6 +14,11 @@ public class Hausenship : MonoBehaviour
     bool gui = false;
     public float cutDelay = 2.0f;
     float cut = 0.0f;
+
+    void Start()
+    {
+        audio.Play();
+    }
 
     void Update()
     {
@@ -43,6 +48,6 @@ public class Hausenship : MonoBehaviour
     {
         gui = true;
         cut = Time.time;
-        audio.Play();
+        audio.PlayOneShot(crash);
     }
 }
