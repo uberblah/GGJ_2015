@@ -26,32 +26,24 @@ public class LandChunk : MonoBehaviour
 
 	}
 
-public void DetermineForm()
+    public void DetermineForm()
     {
-    if (Height >= .25f) 
-    {
-    landType = landTypes.notWater;
-    } 
-    else 
-    {
-    landType = landTypes.water;
-    }
+        if (Height >= .25f)
+        {
+            landType = landTypes.notWater;
+        }
+        else
+        {
+            landType = landTypes.water;
+        }
 
-	if (landType == landTypes.water) 
-	{
-			assignSprite(NotLand);
-	} 
-	else 
-	{
-	assignSprite(Land);
-	}
+        if (landType == landTypes.water)
+        {
+            assignSprite(NotLand);
+        }
+        else
+        {
+            assignSprite(Land);
+        }
     }
-	
-	public void Update()
-	{
-		if (!renderer.isVisible) 
-		{
-
-		}
-	}
 }
