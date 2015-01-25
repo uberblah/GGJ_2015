@@ -12,6 +12,8 @@ public class enemy : Actor
     protected EnemyState      state; // Current AI state
     protected float           lastSwitch; // Last time we switched states
     protected Vector2         moveVec; // Direction we want to move in
+    protected Animator        anim; // Animation
+    private Vector3           initialScale; // Scale we started with
 
 	// Use this for initialization
     protected override void Start()
@@ -25,10 +27,24 @@ public class enemy : Actor
         state = EnemyState.Idle;
         lastSwitch = Time.time;
         moveVec = Vector2.zero;
+        anim = GetComponent<Animator>();
+        anim.CrossFade("Idle", 0f);
+        initialScale = transform.localScale;
 	}
 
     protected override Vector2 GetMove()
     {
+        // Flip sprite
+        if (moveVec.x > 0) // right
+        {
+            Vector3 theScale = initialScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
+        else // left
+        {
+            transform.localScale = initialScale;
+        }
         // Send movement direction
         return moveVec;
     }
@@ -67,7 +83,7 @@ public class enemy : Actor
     protected virtual void DoIdle()
     {
         // Chase player if he gets close
-        if (Vector2.Distance(transform.position, player.transform.position) < 20)
+        if (Vector2.Distance(transform.position, player.transform.position) < 15)
             SwitchState(EnemyState.Chase);
         // Do not move
         moveVec = Vector2.zero;
@@ -79,6 +95,7 @@ public class enemy : Actor
         //if(Time.time > lastSwitch + 4.0f)
         //    SwitchState(EnemyState.Retreat);
         // Move us towards player
+        anim.CrossFade("Wolfy_Run", 0f);
         moveVec = player.transform.position - transform.position;
     }
 
