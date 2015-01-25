@@ -15,6 +15,10 @@ public class enemy : Actor
     protected Animator        anim; // Animation
     private Vector3           initialScale; // Scale we started with
 
+    // Audio
+    public AudioClip          wakeUp;
+    public AudioClip          hurt;
+
 	// Use this for initialization
     protected override void Start()
     {
@@ -84,7 +88,11 @@ public class enemy : Actor
     {
         // Chase player if he gets close
         if (Vector2.Distance(transform.position, player.transform.position) < 15)
+        {
             SwitchState(EnemyState.Chase);
+            // play wake up sound
+            GetComponent<AudioSource>().PlayOneShot(wakeUp);
+        }
         // Do not move
         moveVec = Vector2.zero;
     }
@@ -135,6 +143,8 @@ public class enemy : Actor
     public override void OnDamage()
     {
         base.OnDamage();
+        // Play hurt clip
+        GetComponent<AudioSource>().PlayOneShot(hurt);
         // Remove
         if (GetComponent<Destructible>().GetDead())
             Destroy(gameObject);
