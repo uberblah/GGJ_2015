@@ -6,7 +6,7 @@ public class Hausteroids : MonoBehaviour
     public GameObject asteroid;
     public Hausenship ship;
     public float rate = 1.0f;
-    public float acceleration = 0.1f;
+    public float acceleration = 0.01f;
     public float minSpeed = 1.5f;
     public float maxSpeed = 3.0f;
     public float distance = 20.0f;
