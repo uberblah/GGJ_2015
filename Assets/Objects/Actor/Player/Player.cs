@@ -122,7 +122,6 @@ public class Player : Actor
         }
 
         // Change animation
-        Animator anim = GetComponent<Animator>();
         if (GetMove() != Vector2.zero)
         {
             if (GetMove().x < 0)
@@ -155,7 +154,6 @@ public class Player : Actor
             // Standing based on last orientation
             anim.CrossFade("Standing", 0f);
 
-            Tool tool = inv.GetActive() as Tool;
             if (GetUseTool())
             {
                 // Shoot animation
