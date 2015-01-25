@@ -97,6 +97,10 @@ public class Player : Actor
     {
         base.Update();
 
+        // Don't do any of this if we're dead
+        if (GetComponent<Destructible>().GetDead())
+            return;
+
         Vector3 mousePos = view.ScreenToWorldPoint(Input.mousePosition);
         Vector3 newpos = transform.position + ((mousePos - view.transform.position) * cursorWeight);
         view.transform.position = new Vector3(newpos.x, newpos.y, 0.0f);
@@ -209,7 +213,13 @@ public class Player : Actor
         // Reset button if dead
         if (GetComponent<Destructible>().GetDead())
         {
+            if (GUI.Button(new Rect((Screen.width / 2) - 50, Screen.height - 50, 50, 50), "Restart"))
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+                GUI.Box(new Rect(Screen.width / 2, Screen.height /2 , 100, 30), "Loading");
 
+                Application.LoadLevel(Application.loadedLevelName);
+            }
         }
     }
 
