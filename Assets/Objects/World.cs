@@ -39,7 +39,6 @@ public class World : MonoBehaviour
         fineSize = 30;
         GenerateRandWorld(Vector2.zero,8); //Let there be light!!
         // TODO: set player position
-
     }
     public bool isItPassable(Vector2 locale)
     {
@@ -91,7 +90,6 @@ public class World : MonoBehaviour
                         float noiseValue = Mathf.PerlinNoise(fineSeed + fineVariability * (float)fineX / (float)fineSize, fineSeed + fineVariability * (float)fineY / (float)fineSize); // create noise
                         noiseValue = noiseValue * .25f; // at most .25 different
                         float heiHei = thisOffset + noiseValue;
-                        tiledLand[xCoord, yCoord] = heiHei;
                         if (heiHei < waterCutoff)
                         {
 							TiTi = (GameObject)Instantiate(WateryTile);
