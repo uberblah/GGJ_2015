@@ -244,17 +244,15 @@ public class Player : Actor
             if (GUI.Button(new Rect((Screen.width / 2) - 50, Screen.height - 50, 50, 50), "Restart"))
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-                GUI.Box(new Rect(Screen.width / 2, Screen.height / 2, 100, 30), "Loading");
-
                 Application.LoadLevel(Application.loadedLevelName);
             }
         }
         else
         {
             // Show crosshair
-        int cursorSizeX = 64;
-        int cursorSizeY = 64;
-        GUI.DrawTexture(new Rect(Input.mousePosition.x - cursorSizeX, (Screen.height - Input.mousePosition.y) - cursorSizeY, cursorSizeX, cursorSizeY), crosshair);
+            int cursorSizeX = 64;
+            int cursorSizeY = 64;
+            GUI.DrawTexture(new Rect(Input.mousePosition.x - cursorSizeX, (Screen.height - Input.mousePosition.y) - cursorSizeY, cursorSizeX, cursorSizeY), crosshair);
         }
     }
 
