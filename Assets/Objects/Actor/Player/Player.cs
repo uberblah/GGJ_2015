@@ -240,9 +240,9 @@ public class Player : Actor
         else
         {
             // Show crosshair
-            int cursorSizeX = 64;
-            int cursorSizeY = 64;
-            GUI.DrawTexture(new Rect(Input.mousePosition.x - cursorSizeX, (Screen.height - Input.mousePosition.y) - cursorSizeY, cursorSizeX, cursorSizeY), crosshair);
+        int cursorSizeX = 64;
+        int cursorSizeY = 64;
+        GUI.DrawTexture(new Rect(Input.mousePosition.x - cursorSizeX, (Screen.height - Input.mousePosition.y) - cursorSizeY, cursorSizeX, cursorSizeY), crosshair);
         }
     }
 
