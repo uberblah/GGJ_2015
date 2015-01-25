@@ -3,6 +3,8 @@ using System.Collections;
 
 public class enemy : Actor
 {
+    public float              damage; // Amount of damage we'll do
+
     protected enum EnemyState { Idle, Chase, Retreat };
 
     protected GameObject      player; // Reference to player
@@ -93,5 +95,15 @@ public class enemy : Actor
         // Move back
         if (col.gameObject != player)
             SwitchState(EnemyState.Retreat);
+
+        // Hurt player
+        if (col.gameObject == player)
+        {
+            Destructible plyDes = col.gameObject.GetComponent<Destructible>();
+            if (plyDes != null)
+            {
+                plyDes.Damage(damage);
+            }
+        }
     }
 }
