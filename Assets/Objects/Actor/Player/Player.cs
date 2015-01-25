@@ -3,10 +3,10 @@ using System.Collections;
 
 public class Player : Actor
 {
-    public Camera view = null;
+    public float force; // Force added on move
+    public float cursorWeight = 0.25f; //weight of cursor in camera position
 
-    public float        force; // Force added on move
-    public float        cursorWeight = 0.25f; //weight of cursor in camera position
+    private float       lastToolUse; // Last time we used tool
 
     protected override Vector2 GetMove()
     {
@@ -62,13 +62,9 @@ public class Player : Actor
     protected override void Start()
     {
         base.Start();
-        if (view == null)
-        {
-            view = GetComponent<Camera>();
-            if (view == null) Debug.Log(name + " failed to find its camera");
-        }
         // Set initial values
         forceMul = force;
+        lastToolUse = Time.time;
     }
 
     protected override void Update()
@@ -89,6 +85,15 @@ public class Player : Actor
         if (GetPrevItem())
         {
             inv.LeftShift();
+        }
+        
+        // Use a tool
+        Tool active = inv.GetActive() as Tool; // Make item a tool
+        if (GetUseTool() && active != null // Make sure item is a tool
+            && Time.time > lastToolUse + active.GetDelay()) // Use delay
+        {
+            active.Activate();
+            lastToolUse = Time.time;
         }
     }
 
