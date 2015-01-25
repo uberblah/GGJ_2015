@@ -48,7 +48,10 @@ public class MainMenu : MonoBehaviour
             {
                 stage++;
                 if (stage == strings.Length)
+                {
+                    conclusion.text = "LOADING...";
                     Application.LoadLevel(mainLevel);
+                }
                 else
                 {
                     timer = Time.time + 1.0f;
