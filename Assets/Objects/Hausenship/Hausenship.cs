@@ -4,6 +4,7 @@ using System.Collections;
 public class Hausenship : MonoBehaviour
 {
     public Camera cam;
+    public AudioSource audio;
     public Vector3 camOffset = new Vector3(0.0f, 0.0f, -5.0f);
     public float climb = 10.0f;
     public float decay = -0.1f;
@@ -23,13 +24,13 @@ public class Hausenship : MonoBehaviour
         if (Input.anyKeyDown)
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, climb, 0.0f);
         //should cut to crash scene if it falls too low
-        if (transform.position.y < floor) Cut();
+        if (transform.position.y < floor && !gui) Cut();
         climb -= decay * Time.deltaTime;
     }
 
     void OnCollisionEnter(Collision c)
     {
-        Cut();
+        if(!gui) Cut();
     }
 
     void OnGUI()
@@ -41,5 +42,6 @@ public class Hausenship : MonoBehaviour
     {
         gui = true;
         cut = Time.time;
+        audio.Play();
     }
 }
