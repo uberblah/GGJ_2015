@@ -35,26 +35,6 @@ public class Item : ContextObject
         dropped.Add(this);
 	}
 
-    public virtual void Update()
-    {
-        // Take us out of the world if we have an owner
-        if (IsOwned())
-        {
-            if(GetComponent<Collider2D>() != null)
-                GetComponent<Collider2D>().isTrigger = true; // Disable collisions
-            if (GetComponent<SpriteRenderer>() != null)
-                GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 0); // Make invisible
-        }
-        // Put us back in the world
-        if (IsOwned())
-        {
-            if (GetComponent<Collider2D>() != null)
-                GetComponent<Collider2D>().isTrigger = false; // Enable collisions
-            if (GetComponent<SpriteRenderer>() != null)
-                GetComponent<SpriteRenderer>().color += new Color(0, 0, 0, 255); // Make visible
-        }
-    }
-
 	public void SetItemValue(float v)
 	{
 		value = v;
@@ -64,7 +44,7 @@ public class Item : ContextObject
 	{
 		//Is the item put into an inventory?
 		renderer.enabled = false;
-		body.collider2D.enabled = false;
+		collider2D.enabled = false;
         dropped.Remove(this);
 	}
 
@@ -98,6 +78,17 @@ public class Item : ContextObject
             }
         }
         return nearest;
+    }
+
+    public virtual void OnCollisionEnter2D(Collision2D col)
+    {
+        // TEMPORARY: Give us to the player
+        Player player = col.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            player.GiveItem(this);
+            owner = player;
+        }
     }
 }
 
