@@ -49,6 +49,10 @@ public class Inventory
 		items.Add (i);
 		i.ItemPickedUp ();
 		totalScore += i.value;
+		if (totalScore >= 500.0f) 
+		{
+			Application.LoadLevel("youwon.unity");
+		}
 	}
 
 	public void PutDown(Item i, Vector2 LocationPutDown)
