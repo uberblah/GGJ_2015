@@ -5,21 +5,27 @@ public class World : MonoBehaviour
 {
 private int xSize, ySize; //How big is the world?
 public string worldName; //Name of the planet
-public LandChunk[,] tiledLand; //This is the grid of land, X,Y cooridinates for that chunk of land.
+public float[,] tiledLand; //This is the grid of land, X,Y cooridinates for that chunk of land.
 private System.Random rand;
 public GameObject Tile;
 public GameObject WateryTile;
+public float waterCutoff;
 
 public void Start ()
 {
     renderer.enabled = true;
     xSize = 200; // chunks of land across
     ySize = 200; // chunks of land high
-    tiledLand = new LandChunk[xSize, ySize]; //Let's initalize this array of land!
+	waterCutoff = .20f;
+    tiledLand = new float[xSize, ySize]; //Let's initalize this array of land!
     worldName = "Unknown World"; //You have a better name?
     rand = new System.Random ();
     GenerateRandWorld (); //Let there be light!!
 }
+	public bool isItPassable(Vector2 locale)
+	{
+		return (tiledLand [(int)locale.x / xSize, (int)locale.y / ySize] >= waterCutoff);
+	}
 protected void GenerateRandWorld ()
     {
 		GameObject TiTi;
@@ -27,7 +33,8 @@ protected void GenerateRandWorld ()
     for (int y = 0; y<ySize; y++) { //And every down
     //Determine the height from Perlin Noise //And let the land determine what itself is based on it's height.
 	float heiHei = Mathf.PerlinNoise ((float)Math.Abs (x / ((float)xSize) + (rand.NextDouble () - rand.NextDouble())*.75f), (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - rand.NextDouble())*.75f));
-	if (heiHei >= .20)
+	tiledLand[x,y] = heiHei;
+	if (heiHei >= waterCutoff)
 {
 	TiTi = (GameObject) Instantiate(Tile);
 	TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)(x), (float)(y)));
