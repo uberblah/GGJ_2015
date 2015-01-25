@@ -16,6 +16,7 @@ public class Player : Actor
     private bool        hurt; // Are we hurtin'?
     public float        hurtTime; // How long we flash red
     public float        hurtForce; // Force of a hurt
+    private float       lastHurt; // Last time we were hurt (for red flash)
 
     protected override Vector2 GetMove()
     {
@@ -132,6 +133,18 @@ public class Player : Actor
         {
             anim.CrossFade("Standing", 0f);
         }
+
+        // Flash red if hurt
+        if (hurt)
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
+            // Check if we need to end hurt condition
+            if (Time.time > lastHurt + hurtTime)
+            {
+                GetComponent<SpriteRenderer>().color = Color.white;
+                hurt = false;
+            }
+        }
     }
 
     protected override void FixedUpdate()
@@ -165,6 +178,7 @@ public class Player : Actor
     public override void OnDamage()
     {
         hurt = true;
+        lastHurt = Time.time;
         // Force away from where we're facing
         switch(orientation)
         {
