@@ -22,6 +22,7 @@ public class World : MonoBehaviour
 	public float baseGroundCutoff;
 	public float grassyCutoff;
 	public float forestyCutoff;
+    public Player player;
 
     public void Start()
     {
@@ -37,6 +38,7 @@ public class World : MonoBehaviour
         coarseSeed = (float)rand.NextDouble() * 400;
         fineSize = 30;
         GenerateRandWorld(Vector2.zero,8); //Let there be light!!
+        // TODO: set player position
     }
     public bool isItPassable(Vector2 locale)
     {
