@@ -127,4 +127,12 @@ public class enemy : Actor
             }
         }
     }
+
+    public override void OnDamage()
+    {
+        base.OnDamage();
+        // Remove
+        if (GetComponent<Destructible>().GetDead())
+            Destroy(gameObject);
+    }
 }

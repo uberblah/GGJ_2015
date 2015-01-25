@@ -7,7 +7,6 @@ public class Player : Actor
     public float        cursorWeight = 0.25f; //weight of cursor in camera position
 
     // Sprite stuff
-    public Sprite[]     standingSprites; // Standing sprites
     private Vector3     initialScale; // Scale we started with
     private Animator    anim; // Animation
 
@@ -24,6 +23,10 @@ public class Player : Actor
 
     protected override Vector2 GetMove()
     {
+        // Don't move if dead
+        if (GetComponent<Destructible>().GetDead())
+            return Vector2.zero;
+
         if (GetUseTool())
         {
             return Vector2.zero; // Kill momentum when we use a tool
@@ -142,18 +145,6 @@ public class Player : Actor
             // Standing based on last orientation
             anim.CrossFade("Standing", 0f);
 
-            //switch (orientation)
-            //{
-            //    case SpriteOrientation.FullFront:
-            //        GetComponent<SpriteRenderer>().sprite = standingSprites[1];
-            //        break;
-            //    case SpriteOrientation.FullBack:
-            //        GetComponent<SpriteRenderer>().sprite = standingSprites[2];
-            //        break;
-            //    default:
-            //        GetComponent<SpriteRenderer>().sprite = standingSprites[0];
-            //        break;
-            //}
             Tool tool = inv.GetActive() as Tool;
             if (GetUseTool())
             {
@@ -170,8 +161,6 @@ public class Player : Actor
                 }
             }
         }
-
-        GetComponent<SpriteRenderer>().sprite = standingSprites[2];
 
         // Flash red if hurt
         if (hurt)
@@ -238,7 +227,12 @@ public class Player : Actor
                 body.AddForce(Vector2.up * -hurtForce);
                 break;
         }
-        
+
+        // Die
+        if (GetComponent<Destructible>().GetDead())
+        {
+            transform.Rotate(Vector3.zero, 90);
+        }
     }
 
     private Vector3 FlipScale()
