@@ -7,9 +7,10 @@ using UnityEngine;
 
 public class Inventory
 {
-	List<Item>  items;
-	int         currentlyActiveItem = 0;
-	public float       totalScore;
+	List<Item>          items;
+	int                 currentlyActiveItem = 0;
+	public float        totalScore;
+    public int          piecesFound;
 
 	public void Start()
 	{
@@ -49,6 +50,11 @@ public class Inventory
 		items.Add (i);
 		i.ItemPickedUp ();
 		totalScore += i.value;
+
+        Tool test = i as Tool;
+        if (test == null)
+            piecesFound++;
+
 		if (totalScore >= 500.0f) 
 		{
 			Application.LoadLevel("youwon");

@@ -10,10 +10,12 @@ public class Player : Actor
     private Vector3     initialScale; // Scale we started with
     private Animator    anim; // Animation
 
-    // Footsteps
+    // Audio
+    private AudioSource aSource;
     private float       lastStep; // Time of last footstep sound
     public AudioClip    leftFootstep;
     public AudioClip    rightFootstep;
+    public AudioClip    pickup;
 
     // Hurt
     private bool        hurt; // Are we hurtin'?
@@ -91,6 +93,7 @@ public class Player : Actor
         hurt = false;
         initialScale = transform.localScale;
         anim = GetComponent<Animator>();
+        aSource = GetComponent<AudioSource>();
         // Hide gameover text
         transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         // Hide mouse cursor
@@ -192,7 +195,6 @@ public class Player : Actor
         // Play footstep noise
         if (GetMove() != Vector2.zero && Time.time > lastStep + 0.2f)
         {
-            AudioSource aSource = GetComponent<AudioSource>();
             if (Random.Range(0,3) == 0)
                 aSource.PlayOneShot(leftFootstep);
             else
@@ -213,12 +215,18 @@ public class Player : Actor
         if(inv.GetActive() != null)
             GUI.Box(new Rect(0, 0, 200, 20), "Active item: " + inv.GetActive().gameObject.name);
 
-        // Show health
-        
-        GUI.Box(new Rect(0,Screen.height - 20, GetComponent<Destructible>().health * 2, 20), "Health");
-
 		// Show Score
 		GUI.Box (new Rect (Screen.width - 100, Screen.height - 20, 100, 20), "Score: " + inv.totalScore.ToString());
+
+        // Pieces found
+        GUIStyle style = new GUIStyle();
+        style.fontSize = 30;
+        style.normal.textColor = Color.white;
+        GUI.Box(new Rect(Screen.width/2 - 150, 0, 150, 30), "Pieces Found: " + inv.piecesFound, style);
+
+        // Show health
+        style.normal.textColor = Color.red;
+        GUI.Box(new Rect(0, Screen.height - 30, 200, 30), "+" + GetComponent<Destructible>().health, style);
 
         // Reset button if dead
         if (GetComponent<Destructible>().GetDead())
@@ -233,9 +241,11 @@ public class Player : Actor
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    public virtual void GiveItem(Item i)
     {
-
+        base.GiveItem(i);
+        // Play pickup sound
+        aSource.PlayOneShot(pickup);
     }
 
     public override void OnDamage()
