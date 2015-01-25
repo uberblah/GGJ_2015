@@ -251,6 +251,8 @@ public class Player : Actor
         base.GiveItem(i);
         // Play pickup sound
         aSource.PlayOneShot(pickup);
+        // Give a small bit of health
+        GetComponent<Destructible>().Heal(Random.Range(10, 20));
     }
 
     public override void OnDamage()
