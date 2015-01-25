@@ -168,6 +168,10 @@ public class Player : Actor
         // Show active object, temporary?
         if(inv.GetActive() != null)
             GUI.Box(new Rect(0, 0, 200, 20), "Active item: " + inv.GetActive().gameObject.name);
+
+        // Show health
+        
+        GUI.Box(new Rect(0,Screen.height - 20, GetComponent<Destructible>().health * 2, 20), "Health");
     }
 
     void OnCollisionEnter2D(Collision2D col)
