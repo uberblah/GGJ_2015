@@ -19,8 +19,13 @@ public class LaserGun : Tool
     {
         if (projectile != null)
         {
+            // Create projectile
             GameObject newProj = (GameObject)Instantiate(projectile, owner.transform.position, Quaternion.identity); // Shoot from parent, not where we are
-            newProj.GetComponent<Projectile>().SetDirection(Vector2.right);
+            // Ignore collision with player
+            Physics2D.IgnoreCollision(newProj.collider2D, owner.collider2D);
+            // Shoot in in direction of mouse pointer
+            newProj.GetComponent<Projectile>().SetDirection(
+                Camera.main.ScreenToWorldPoint(Input.mousePosition) - owner.transform.position);
             // Play sound
             audio.Play();
         }
