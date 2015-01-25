@@ -25,8 +25,16 @@ public class enemy : Actor
         base.Start();
         // Find first player
         player = GameObject.FindWithTag("Player");
-        // Set force (public later?)
-        forceMul = force;
+        // Roll dice for super-fast enemy
+        if (Random.Range(1, 20) == 1)
+        {
+            forceMul = 105;
+        }
+        else
+        {
+            // Set force with random component
+            forceMul = force * Random.Range(0.8f, 1.6f);
+        }
         // Set starting state
         state = EnemyState.Idle;
         lastSwitch = Time.time;
@@ -114,7 +122,7 @@ public class enemy : Actor
     protected virtual void DoRetreat()
     {
         // Change to chase after amount of time
-        if (Time.time > lastSwitch + 1.5f)
+        if (Time.time > lastSwitch + 1.2f)
             SwitchState(EnemyState.Chase);
         // Move away from player
         moveVec = transform.position - player.transform.position + new Vector3(Random.Range(-10,10),Random.Range(-10,10),0);
