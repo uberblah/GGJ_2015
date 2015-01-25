@@ -4,6 +4,7 @@ using System.Collections;
 public class enemy : Actor
 {
     public float              damage; // Amount of damage we'll do
+    public float              force; // Amount of force while moving
 
     protected enum EnemyState { Idle, Chase, Retreat };
 
@@ -19,7 +20,7 @@ public class enemy : Actor
         // Find first player
         player = GameObject.FindWithTag("Player");
         // Set force (public later?)
-        forceMul = 10;
+        forceMul = force;
         // Set starting state
         state = EnemyState.Idle;
         lastSwitch = Time.time;
@@ -66,7 +67,7 @@ public class enemy : Actor
     protected virtual void DoIdle()
     {
         // Chase player if he gets close
-        if (Vector2.Distance(transform.position, player.transform.position) < 10)
+        if (Vector2.Distance(transform.position, player.transform.position) < 20)
             SwitchState(EnemyState.Chase);
         // Do not move
         moveVec = Vector2.zero;
@@ -84,17 +85,20 @@ public class enemy : Actor
     protected virtual void DoRetreat()
     {
         // Change to chase after amount of time
-        if (Time.time > lastSwitch + 3.0f)
+        if (Time.time > lastSwitch + 2.5f)
             SwitchState(EnemyState.Chase);
         // Move away from player
-        moveVec = transform.position - player.transform.position;
+        moveVec = transform.position - player.transform.position + new Vector3(Random.Range(-10,10),Random.Range(-10,10),0);
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        // Move back
-        if (col.gameObject != player)
+        // Move back when we bump into stuff
+        if (col.gameObject != player &&
+            col.gameObject.GetComponent<Projectile>() == null)
+        {
             SwitchState(EnemyState.Retreat);
+        }
 
         // Hurt player
         if (col.gameObject == player)
