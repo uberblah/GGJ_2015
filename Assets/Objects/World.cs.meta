@@ -8,6 +8,9 @@ MonoImporter:
   - GrassyTile: {fileID: 139138, guid: aa9495a04d9eda449b82f27e74c26252, type: 2}
   - ForestyTile: {fileID: 184952, guid: c9e2ec7a61e953e4ebc4b05ec8fa4a5e, type: 2}
   - RockyTile: {fileID: 103754, guid: a8f25cd3169ff8349930742a2e580d50, type: 2}
+  - commonPart: {fileID: 119456, guid: f3bcb033acca2184d86dd4f1a3821078, type: 2}
+  - uncommonPart: {fileID: 189218, guid: 99702840ee5e9f646b7295946b8f8ab0, type: 2}
+  - rarePart: {fileID: 108420, guid: fa5ec89b22434f94bb31682fabc6d361, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
