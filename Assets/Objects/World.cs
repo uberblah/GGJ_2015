@@ -46,9 +46,6 @@ public class World : MonoBehaviour
                 (float)rand.NextDouble() * generationUnitSize,
                 (float)rand.NextDouble() * generationUnitSize);
         } while (!isItPassable(initialPlayerPos));
-        // create the player
-        Vector3 initPlayerPos = new Vector3(initialPlayerPos.x, initialPlayerPos.y);
-        Instantiate(player, initPlayerPos, Quaternion.identity);
     }
     public bool isItPassable(Vector2 locale)
     {
