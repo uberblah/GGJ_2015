@@ -33,8 +33,9 @@ public class Projectile : Actor
         Destructible objDes = col.gameObject.GetComponent<Destructible>();
         if (objDes != null)
         {
-            objDes.Damage(200);
-            Destroy(gameObject);
+            objDes.Damage(20);
         }
+
+        Destroy(gameObject);
     }
 }
