@@ -124,13 +124,14 @@ public class Player : Actor
             }
             else if (GetMove().y > 0)
             {
-                anim.CrossFade("Walk_Front", 0f);
+                anim.CrossFade("Back_Walk", 0f);
                 transform.localScale = initialScale;
                 orientation = SpriteOrientation.FullFront;
             }
         }
         else
         {
+            // Standing based on last orientation
             anim.CrossFade("Standing", 0f);
         }
 
