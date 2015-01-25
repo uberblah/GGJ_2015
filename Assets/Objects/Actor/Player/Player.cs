@@ -3,8 +3,11 @@ using System.Collections;
 
 public class Player : Actor
 {
-    public float force; // Force added on move
-    public float cursorWeight = 0.25f; //weight of cursor in camera position
+    public float        force; // Force added on move
+    public float        cursorWeight = 0.25f; //weight of cursor in camera position
+
+    private Vector3     initialScale;
+    private bool        facingRight;
 
     protected override Vector2 GetMove()
     {
@@ -62,6 +65,8 @@ public class Player : Actor
         base.Start();
         // Set initial values
         forceMul = force;
+
+        initialScale = transform.localScale;
     }
 
     protected override void Update()
@@ -82,6 +87,28 @@ public class Player : Actor
         if (GetPrevItem())
         {
             inv.LeftShift();
+        }
+
+        // Change animation
+        Animator anim = GetComponent<Animator>();
+        if (GetMove() != Vector2.zero)
+        {
+            anim.CrossFade("Walk_Sprite", 0f);
+            // Reverse/unreverse sprite
+            if (GetMove().x < 0)
+            {
+                Vector3 theScale = initialScale;
+                theScale.x *= -1;
+                transform.localScale = theScale;
+            }
+            else
+            {
+                transform.localScale = initialScale;
+            }
+        }
+        else
+        {
+            anim.CrossFade("Standing", 0f);
         }
     }
 
