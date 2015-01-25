@@ -18,6 +18,8 @@ public class World : MonoBehaviour
 	public GameObject commonPart;
 	public GameObject uncommonPart;
 	public GameObject rarePart;
+	public GameObject Rock; //not the music, the round ground seed thing
+	public GameObject Tree; //Not the data structure, 
     public float waterCutoff;
 	public float baseGroundCutoff;
 	public float grassyCutoff;
@@ -58,6 +60,8 @@ public class World : MonoBehaviour
     {
 		GameObject partyPart; //PARTS ENTER INTO THE WORLD!!! VIVE LE PARTS, THEY FLEE THE OPPRESIVE PRISON WHICH WAS ONCE THEIRS!
         GameObject TiTi;
+		GameObject Boulder; //His name is boulder, he's my pet rock.
+		GameObject Leafy; //Her name is leafy, she's not a rock or my pet, but she's food for my turtle.
         // first, create noise for coarse generation
         int coarseSize = generationUnitSize / fineSize;
         float coarseVariability = 6;
@@ -117,6 +121,11 @@ public class World : MonoBehaviour
 								partyPart.GetComponent<Item>().value = 50;
 								partyPart.GetComponent<Item>().transform.position = new Vector2((float)xCoord, (float)yCoord);
 							}
+							else if (rand.NextDouble() >= (double).999)
+							{
+								Boulder = (GameObject)Instantiate(Rock);
+								Boulder.GetComponent<MeshFilter>().transform.position = new Vector3((float)xCoord, (float)yCoord);
+							}
                         }
 						else if (heiHei < grassyCutoff)
 						{
@@ -131,6 +140,16 @@ public class World : MonoBehaviour
 								partyPart.GetComponent<Item>().transform.position = new Vector2((float)xCoord, (float)yCoord);
 
 							}
+							else if (rand.NextDouble() >= (double).999)
+							{
+								Boulder = (GameObject)Instantiate(Rock);
+								Boulder.GetComponent<MeshFilter>().transform.position = new Vector3((float)xCoord, (float)yCoord);
+							}
+							else if (rand.NextDouble() >= (double).999)
+							{
+								Leafy = (GameObject)Instantiate(Tree);
+								Leafy.GetComponent<MeshFilter>().transform.position = new Vector3((float)xCoord, (float)yCoord);
+							}
 						}
 						else if (heiHei < forestyCutoff)
 						{
@@ -143,6 +162,11 @@ public class World : MonoBehaviour
 								partyPart = (GameObject)Instantiate(rarePart);
 								partyPart.GetComponent<Item>().value = 100;
 								partyPart.GetComponent<Item>().transform.position = new Vector2((float)xCoord, (float)yCoord);
+							}
+							else if (rand.NextDouble() >= (double).999)
+							{
+								Leafy = (GameObject)Instantiate(Tree);
+								Leafy.GetComponent<MeshFilter>().transform.position = new Vector3((float)xCoord, (float)yCoord);
 							}
 						}
 						else

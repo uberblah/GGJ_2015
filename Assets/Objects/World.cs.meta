@@ -11,6 +11,9 @@ MonoImporter:
   - commonPart: {fileID: 119456, guid: f3bcb033acca2184d86dd4f1a3821078, type: 2}
   - uncommonPart: {fileID: 189218, guid: 99702840ee5e9f646b7295946b8f8ab0, type: 2}
   - rarePart: {fileID: 108420, guid: fa5ec89b22434f94bb31682fabc6d361, type: 2}
+  - Rock: {fileID: 128586, guid: 4124363900ff08b4f8f2c2c585d3483c, type: 2}
+  - Tree: {fileID: 162634, guid: 013058969b056b44a9a91e466a0b8360, type: 2}
+  - player: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
