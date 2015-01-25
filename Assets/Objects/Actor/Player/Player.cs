@@ -201,6 +201,9 @@ public class Player : Actor
 
     public void OnGUI()
     {
+		// Show Instructions
+		GUI.Box (new Rect (Screen.width / 2, Screen.height - 50, 300, 20), "WASD to move, Mouse to fire");
+
         // Show active object, temporary?
         if(inv.GetActive() != null)
             GUI.Box(new Rect(0, 0, 200, 20), "Active item: " + inv.GetActive().gameObject.name);

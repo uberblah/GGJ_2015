@@ -35,6 +35,7 @@ public class Hausenship : MonoBehaviour
 
     void OnGUI()
     {
+		GUI.Box (new Rect (20, Screen.height - 70, 250, 20), "PRESS ANY KEY!!!");
         if(gui) GUI.Box(new Rect(10, 10, 600, 50), "CRASH!!!\n(crash landing in progress)");
     }
 
