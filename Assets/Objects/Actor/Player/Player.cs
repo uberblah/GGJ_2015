@@ -21,6 +21,8 @@ public class Player : Actor
     public float        hurtForce; // Force of a hurt
     private float       lastHurt; // Last time we were hurt (for red flash)
 
+    public Texture2D    crosshair; // Custom crosshair
+
     protected override Vector2 GetMove()
     {
         // Don't move if dead
@@ -91,14 +93,12 @@ public class Player : Actor
         anim = GetComponent<Animator>();
         // Hide gameover text
         transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+        // Hide mouse cursor
+        Screen.showCursor = false;
     }
 
     protected override void Update()
     {
-		if (inv.totalScore >= 500.0f) 
-		{
-			Application.LoadLevel("youwon");
-		}
         base.Update();
 
         // Don't do any of this if we're dead
@@ -201,6 +201,11 @@ public class Player : Actor
 
     public void OnGUI()
     {
+        // Show crosshair
+        int cursorSizeX = 64;
+        int cursorSizeY = 64;
+        GUI.DrawTexture(new Rect(Input.mousePosition.x - cursorSizeX, (Screen.height - Input.mousePosition.y) - cursorSizeY, cursorSizeX, cursorSizeY), crosshair);
+
 		// Show Instructions
 		GUI.Box (new Rect (Screen.width / 2, Screen.height - 50, 300, 20), "WASD to move, Mouse to fire");
 
