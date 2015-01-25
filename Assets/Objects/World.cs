@@ -56,7 +56,6 @@ public class World : MonoBehaviour
             initialPlayerPos = new Vector2(
                 ((float)rand.NextDouble() - 1) * segmentGenDepth * 2 + mapTiles / 2,
                 ((float)rand.NextDouble() - 1) * segmentGenDepth * 2 + mapTiles / 2);
-            Debug.Log("(" + initialPlayerPos.x + "," + initialPlayerPos.y + ")");
         } while (!isItPassable(initialPlayerPos));
         player.transform.position = initialPlayerPos;
         // put ship and gun near player spawn
