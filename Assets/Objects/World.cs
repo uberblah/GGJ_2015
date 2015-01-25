@@ -13,8 +13,8 @@ public GameObject WateryTile;
 public void Start ()
 {
     renderer.enabled = true;
-    xSize = 50; //Fifty chunks of land across
-    ySize = 50; //Fifty chunks of land high
+    xSize = 200; // chunks of land across
+    ySize = 200; // chunks of land high
     tiledLand = new LandChunk[xSize, ySize]; //Let's initalize this array of land!
     worldName = "Unknown World"; //You have a better name?
     rand = new System.Random ();
@@ -26,8 +26,8 @@ protected void GenerateRandWorld ()
     for (int x = 0; x < xSize; x++) { //For Every land across
     for (int y = 0; y<ySize; y++) { //And every down
     //Determine the height from Perlin Noise //And let the land determine what itself is based on it's height.
-	float heiHei = Mathf.PerlinNoise ((float)Math.Abs (x / ((float)xSize) + (rand.NextDouble () - rand.NextDouble())), (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - rand.NextDouble())));
-	if (heiHei >= .25)
+	float heiHei = Mathf.PerlinNoise ((float)Math.Abs (x / ((float)xSize) + (rand.NextDouble () - rand.NextDouble())*.75f), (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - rand.NextDouble())*.75f));
+	if (heiHei >= .20)
 {
 	TiTi = (GameObject) Instantiate(Tile);
 	TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)(x), (float)(y)));
