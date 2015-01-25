@@ -33,7 +33,7 @@ public class enemy : Actor
         else
         {
             // Set force with random component
-            forceMul = force * Random.Range(0.8f, 1.6f);
+            forceMul = force * Random.Range(0.8f, 1.4f);
         }
         // Set starting state
         state = EnemyState.Idle;
