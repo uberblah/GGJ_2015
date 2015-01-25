@@ -89,6 +89,8 @@ public class Player : Actor
         hurt = false;
         initialScale = transform.localScale;
         anim = GetComponent<Animator>();
+        // Hide gameover text
+        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
     }
 
     protected override void Update()
@@ -202,7 +204,13 @@ public class Player : Actor
         GUI.Box(new Rect(0,Screen.height - 20, GetComponent<Destructible>().health * 2, 20), "Health");
 
 		// Show Score
-		GUI.Box (new Rect (Screen.width - 100, Screen.height - 20, 100, 20), "Score: " + inv.totalScore.ToString()); 
+		GUI.Box (new Rect (Screen.width - 100, Screen.height - 20, 100, 20), "Score: " + inv.totalScore.ToString());
+
+        // Reset button if dead
+        if (GetComponent<Destructible>().GetDead())
+        {
+
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -234,7 +242,10 @@ public class Player : Actor
         // Die
         if (GetComponent<Destructible>().GetDead())
         {
-            transform.Rotate(transform.position, 90);
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+            // Show game over text
+            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 
