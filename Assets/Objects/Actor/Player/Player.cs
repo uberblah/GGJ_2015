@@ -231,7 +231,7 @@ public class Player : Actor
         // Die
         if (GetComponent<Destructible>().GetDead())
         {
-            transform.Rotate(Vector3.zero, 90);
+            transform.Rotate(transform.position, 90);
         }
     }
 
