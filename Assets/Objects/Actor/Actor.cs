@@ -99,7 +99,7 @@ public class Actor : MonoBehaviour
         if (view == null)
         {
             view = GetComponent<Camera>();
-            if (view == null) Debug.Log(name + " failed to find its camera");
+            //if (view == null) Debug.Log(name + " failed to find its camera");
         }
 
         // initialize the sprite orientation to profile right
