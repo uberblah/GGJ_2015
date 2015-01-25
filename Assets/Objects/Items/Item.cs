@@ -7,7 +7,7 @@ public class Item : ContextObject
 
 	protected Rigidbody2D   body; //Object Body
 	public float         value; // Assumed to be a random value to the object, either how much it contributes to a task or goal
-	private bool            beingUsed; // Is it being used punk?
+	//private bool            beingUsed; // Is it being used punk?
 
 	#region Owner Stuff
 	protected Actor owner; // Who owns the tool?
@@ -31,7 +31,7 @@ public class Item : ContextObject
 
 	public virtual void Start()
 	{
-		beingUsed = false;
+		//beingUsed = false;
         dropped.Add(this);
 	}
 
@@ -53,13 +53,13 @@ public class Item : ContextObject
 		renderer.enabled = true;
 		body.collider2D.enabled = true;
 		body.position = WhereWasIPutDown;
-		beingUsed = false;
+		//beingUsed = false;
         if(!dropped.Contains(this)) dropped.Add(this);
 	}
 
 	public void ItemNowBeingUsed()
 	{
-		beingUsed = true;
+		//beingUsed = true;
 		renderer.enabled = true;
 		body.collider2D.enabled = true;
 	}
