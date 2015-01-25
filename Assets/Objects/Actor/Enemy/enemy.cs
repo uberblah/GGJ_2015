@@ -97,6 +97,10 @@ public class enemy : Actor
         // Move us towards player
         anim.CrossFade("Wolfy_Run", 0f);
         moveVec = player.transform.position - transform.position;
+
+        // Retreat if player is dead
+        if (player.GetComponent<Destructible>().GetDead())
+            SwitchState(EnemyState.Retreat);
     }
 
     protected virtual void DoRetreat()

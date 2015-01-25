@@ -89,6 +89,8 @@ public class Player : Actor
         hurt = false;
         initialScale = transform.localScale;
         anim = GetComponent<Animator>();
+        // Hide gameover text
+        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
     }
 
     protected override void Update()
@@ -98,6 +100,10 @@ public class Player : Actor
 			Application.LoadLevel("youwon");
 		}
         base.Update();
+
+        // Don't do any of this if we're dead
+        if (GetComponent<Destructible>().GetDead())
+            return;
 
         Vector3 mousePos = view.ScreenToWorldPoint(Input.mousePosition);
         Vector3 newpos = transform.position + ((mousePos - view.transform.position) * cursorWeight);
@@ -207,6 +213,21 @@ public class Player : Actor
 
 		// Show Score
 		GUI.Box (new Rect (Screen.width - 100, Screen.height - 20, 100, 20), "Score: " + inv.totalScore.ToString());
+<<<<<<< HEAD
+=======
+
+        // Reset button if dead
+        if (GetComponent<Destructible>().GetDead())
+        {
+            if (GUI.Button(new Rect((Screen.width / 2) - 50, Screen.height - 50, 50, 50), "Restart"))
+            {
+                transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
+                GUI.Box(new Rect(Screen.width / 2, Screen.height /2 , 100, 30), "Loading");
+
+                Application.LoadLevel(Application.loadedLevelName);
+            }
+        }
+>>>>>>> 26aee52c4c228b3e5952cabd9654036d3ffbffc5
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -238,7 +259,10 @@ public class Player : Actor
         // Die
         if (GetComponent<Destructible>().GetDead())
         {
-            transform.Rotate(transform.position, 90);
+            GetComponent<SpriteRenderer>().enabled = false;
+            // Show game over text
+            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
+            transform.localScale = initialScale;
         }
     }
 

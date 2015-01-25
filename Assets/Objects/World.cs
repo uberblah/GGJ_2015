@@ -22,6 +22,7 @@ public class World : MonoBehaviour
 	public float baseGroundCutoff;
 	public float grassyCutoff;
 	public float forestyCutoff;
+    public Player player;
 
     public void Start()
     {
@@ -37,6 +38,14 @@ public class World : MonoBehaviour
         coarseSeed = (float)rand.NextDouble() * 400;
         fineSize = 30;
         GenerateRandWorld(Vector2.zero,8); //Let there be light!!
+        // pick a dry spot for the player
+        Vector2 initialPlayerPos;
+        do
+        {
+            initialPlayerPos = new Vector2(
+                (float)rand.NextDouble() * generationUnitSize,
+                (float)rand.NextDouble() * generationUnitSize);
+        } while (!isItPassable(initialPlayerPos));
     }
     public bool isItPassable(Vector2 locale)
     {
@@ -88,6 +97,7 @@ public class World : MonoBehaviour
                         float noiseValue = Mathf.PerlinNoise(fineSeed + fineVariability * (float)fineX / (float)fineSize, fineSeed + fineVariability * (float)fineY / (float)fineSize); // create noise
                         noiseValue = noiseValue * .25f; // at most .25 different
                         float heiHei = thisOffset + noiseValue;
+                        tiledLand[xCoord, yCoord] = heiHei;
                         if (heiHei < waterCutoff)
                         {
 							TiTi = (GameObject)Instantiate(WateryTile);
