@@ -86,15 +86,6 @@ public class Player : Actor
         {
             inv.LeftShift();
         }
-        
-        // Use a tool
-        Tool active = inv.GetActive() as Tool; // Make item a tool
-        if (GetUseTool() && active != null // Make sure item is a tool
-            && Time.time > lastToolUse + active.GetDelay()) // Use delay
-        {
-            active.Activate();
-            lastToolUse = Time.time;
-        }
     }
 
     public void OnGUI()
