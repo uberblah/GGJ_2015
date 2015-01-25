@@ -24,6 +24,7 @@ public class World : MonoBehaviour
 	public GameObject Enemy; //...Exactly what it sounds like chicklet.
     //public GameObject ship; // set in Unity
     public Tool weapon; // set in Unity
+    public GameObject ship;
     public float waterCutoff;
 	public float baseGroundCutoff;
 	public float grassyCutoff;
@@ -60,7 +61,7 @@ public class World : MonoBehaviour
         player.transform.position = initialPlayerPos;
         // put ship and gun near player spawn
         weapon.transform.position = initialPlayerPos + new Vector2(5, 2);
-        //ship.transform.position = initialPlayerPos + new Vector2(2, 0);
+        ship.transform.position = initialPlayerPos + new Vector2(7, -21);
     }
 
     // check if it's possible to stand on a bit of land
