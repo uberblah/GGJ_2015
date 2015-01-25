@@ -6,7 +6,10 @@ public class Player : Actor
     public float        force; // Force added on move
     public float        cursorWeight = 0.25f; //weight of cursor in camera position
 
+    // Sprite stuff
+    public Sprite[]     standingSprites; // Standing sprites
     private Vector3     initialScale; // Scale we started with
+
     // Footsteps
     private float       lastStep; // Time of last footstep sound
     public AudioClip    leftFootstep;
@@ -20,6 +23,9 @@ public class Player : Actor
 
     protected override Vector2 GetMove()
     {
+        if (GetUseTool())
+            return Vector2.zero; // Kill momentum when we use a tool
+
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
@@ -133,7 +139,22 @@ public class Player : Actor
         {
             // Standing based on last orientation
             anim.CrossFade("Standing", 0f);
+
+            switch (orientation)
+            {
+                case SpriteOrientation.FullFront:
+                    GetComponent<SpriteRenderer>().sprite = standingSprites[1];
+                    break;
+                case SpriteOrientation.FullBack:
+                    GetComponent<SpriteRenderer>().sprite = standingSprites[2];
+                    break;
+                default:
+                    GetComponent<SpriteRenderer>().sprite = standingSprites[0];
+                    break;
+            }
         }
+
+        GetComponent<SpriteRenderer>().sprite = standingSprites[2];
 
         // Flash red if hurt
         if (hurt)
