@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Player : Actor
 {
-    public Camera view = null;
-
     public float force; // Force added on move
     public float cursorWeight = 0.25f; //weight of cursor in camera position
 
@@ -64,11 +62,6 @@ public class Player : Actor
     protected override void Start()
     {
         base.Start();
-        if (view == null)
-        {
-            view = GetComponent<Camera>();
-            if (view == null) Debug.Log(name + " failed to find its camera");
-        }
         // Set initial values
         forceMul = force;
         lastToolUse = Time.time;
