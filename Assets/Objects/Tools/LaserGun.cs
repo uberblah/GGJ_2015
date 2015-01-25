@@ -8,10 +8,6 @@ public class LaserGun : Tool
     public override void Start()
     {
         base.Start();
-    }
-
-    public void Update()
-    {
         showMenu = false; // Temporary
     }
 

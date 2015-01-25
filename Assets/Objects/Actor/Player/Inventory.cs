@@ -31,7 +31,7 @@ public class Inventory
 
     public Item GetActive()
     {
-        if (currentlyActiveItem < items.Count)
+        if (currentlyActiveItem < items.Count && items.Count > 0)
             return items[currentlyActiveItem];
         else return null;
     }

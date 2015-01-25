@@ -6,7 +6,11 @@ public class Player : Actor
     public float        force; // Force added on move
     public float        cursorWeight = 0.25f; //weight of cursor in camera position
 
-    private Vector3     initialScale;
+    private Vector3     initialScale; // Scale we started with
+    // Footsteps
+    private float       lastStep; // Time of last footstep sound
+    public AudioClip    leftFootstep;
+    public AudioClip    rightFootstep;
 
     protected override Vector2 GetMove()
     {
@@ -118,6 +122,22 @@ public class Player : Actor
         else
         {
             anim.CrossFade("Standing", 0f);
+        }
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        // Play footstep noise
+        if (GetMove() != Vector2.zero && Time.time > lastStep + 0.2f)
+        {
+            AudioSource aSource = GetComponent<AudioSource>();
+            if (Random.Range(0,3) == 0)
+                aSource.PlayOneShot(leftFootstep);
+            else
+                aSource.PlayOneShot(rightFootstep);
+
+            lastStep = Time.time;
         }
     }
 
