@@ -41,7 +41,7 @@ public class World : MonoBehaviour
 
         segmentSize = 30;
         mapSegments = 100;
-        segmentGenDepth = 2;
+        segmentGenDepth = 1;
         int mapTiles = mapSegments * segmentSize;
         tiledLand = new float[mapTiles, mapTiles]; //Let's initalize this array of land!
         generatedSegment = new bool[mapSegments, mapSegments];

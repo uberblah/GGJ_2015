@@ -193,6 +193,9 @@ public class Player : Actor
                 hurt = false;
             }
         }
+
+        // check if we need to generate more map segments
+        // TODO
     }
 
     protected override void FixedUpdate()
