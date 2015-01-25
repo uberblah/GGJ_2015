@@ -3,30 +3,30 @@ using System.Collections;
 
 public class Player : Actor
 {
-    public float        force; // Force added on move
-    public float        cursorWeight = 0.25f; //weight of cursor in camera position
+    public float force; // Force added on move
+    public float cursorWeight = 0.25f; //weight of cursor in camera position
 
     // Sprite stuff
-    private Vector3     initialScale; // Scale we started with
-    private Animator    anim; // Animation
+    private Vector3 initialScale; // Scale we started with
+    private Animator anim; // Animation
 
     // Audio
     private AudioSource aSource;
-    private float       lastStep; // Time of last footstep sound
-    public AudioClip    leftFootstep;
-    public AudioClip    rightFootstep;
-    public AudioClip    pickup;
+    private float lastStep; // Time of last footstep sound
+    public AudioClip leftFootstep;
+    public AudioClip rightFootstep;
+    public AudioClip pickup;
 
     // Hurt
-    private bool        hurt; // Are we hurtin'?
-    public float        hurtTime; // How long we flash red
-    public float        hurtForce; // Force of a hurt
-    private float       lastHurt; // Last time we were hurt (for red flash)
+    private bool hurt; // Are we hurtin'?
+    public float hurtTime; // How long we flash red
+    public float hurtForce; // Force of a hurt
+    private float lastHurt; // Last time we were hurt (for red flash)
 
-    public Texture2D    crosshair; // Custom crosshair
+    public Texture2D crosshair; // Custom crosshair
 
     // For map generation
-    public World        theWorld;
+    public World theWorld;
 
     protected override Vector2 GetMove()
     {
@@ -97,8 +97,6 @@ public class Player : Actor
         initialScale = transform.localScale;
         anim = GetComponent<Animator>();
         aSource = GetComponent<AudioSource>();
-        // Hide gameover text
-        transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
         // Hide mouse cursor
         Screen.showCursor = false;
     }
@@ -139,7 +137,7 @@ public class Player : Actor
                 transform.localScale = FlipScale();
                 orientation = SpriteOrientation.ProfileLeft;
             }
-            else if(GetMove().x > 0)
+            else if (GetMove().x > 0)
             {
                 anim.CrossFade("Walk_Sprite", 0f);
                 transform.localScale = initialScale;
@@ -210,7 +208,7 @@ public class Player : Actor
         // Play footstep noise
         if (GetMove() != Vector2.zero && Time.time > lastStep + 0.2f)
         {
-            if (Random.Range(0,3) == 0)
+            if (Random.Range(0, 3) == 0)
                 aSource.PlayOneShot(leftFootstep);
             else
                 aSource.PlayOneShot(rightFootstep);
@@ -222,17 +220,17 @@ public class Player : Actor
     public void OnGUI()
     {
         // Show active object, temporary?
-        if(inv.GetActive() != null)
+        if (inv.GetActive() != null)
             GUI.Box(new Rect(0, 0, 200, 20), "Active item: " + inv.GetActive().gameObject.name);
 
-		// Show Score
-		GUI.Box (new Rect (Screen.width - 100, Screen.height - 20, 100, 20), "Score: " + inv.totalScore.ToString());
+        // Show Score
+        GUI.Box(new Rect(Screen.width - 100, Screen.height - 20, 100, 20), "Score: " + inv.totalScore.ToString());
 
         // Pieces found
         GUIStyle style = new GUIStyle();
         style.fontSize = 30;
         style.normal.textColor = Color.white;
-        GUI.Box(new Rect(Screen.width/2 - 150, 0, 150, 30), "Pieces Found: " + inv.piecesFound, style);
+        GUI.Box(new Rect(Screen.width / 2 - 150, 0, 150, 30), "Pieces Found: " + inv.piecesFound, style);
 
         // Show health
         style.normal.textColor = Color.red;
@@ -270,7 +268,7 @@ public class Player : Actor
         hurt = true;
         lastHurt = Time.time;
         // Force away from where we're facing
-        switch(orientation)
+        switch (orientation)
         {
             case SpriteOrientation.ProfileLeft:
                 body.AddForce(Vector2.right * hurtForce);
@@ -291,8 +289,11 @@ public class Player : Actor
         {
             GetComponent<SpriteRenderer>().enabled = false;
             // Show game over text
-            transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = true;
-            transform.localScale = initialScale;
+            foreach (Transform child in view.transform)
+            {
+                if (child.name == "Game Over")
+                    child.GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
     }
 
