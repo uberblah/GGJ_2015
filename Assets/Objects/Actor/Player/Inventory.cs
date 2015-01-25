@@ -51,7 +51,7 @@ public class Inventory
 		totalScore += i.value;
 		if (totalScore >= 500.0f) 
 		{
-			Application.LoadLevel("youwon.unity");
+			Application.LoadLevel("youwon");
 		}
 	}
 
