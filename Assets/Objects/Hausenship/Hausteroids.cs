@@ -5,7 +5,7 @@ public class Hausteroids : MonoBehaviour
 {
     public GameObject asteroid;
     public Hausenship ship;
-    public float rate = 1.0f;
+    public float rate = 0.1f;
     public float acceleration = 0.01f;
     public float minSpeed = 1.5f;
     public float maxSpeed = 3.0f;
@@ -20,9 +20,9 @@ public class Hausteroids : MonoBehaviour
             last = Time.time;
             Vector3 pos = ship.transform.position + new Vector3(distance, Random.RandomRange(ship.floor, ship.ceil), 0.0f);
             GameObject go = Instantiate(asteroid, pos, new Quaternion()) as GameObject;
-            go.GetComponent<Rigidbody>().velocity = new Vector3(Random.RandomRange(minSpeed, maxSpeed), 0.0f, 0.0f);
+            go.GetComponent<Rigidbody>().velocity = new Vector3(-Random.RandomRange(minSpeed, maxSpeed), 0.0f, 0.0f);
             Destroy(go, lifeSpan);
         }
-        rate -= acceleration * Time.time;
+        rate -= acceleration * Time.deltaTime;
     }
 }
