@@ -93,17 +93,25 @@ public class Player : Actor
         Animator anim = GetComponent<Animator>();
         if (GetMove() != Vector2.zero)
         {
-            anim.CrossFade("Walk_Sprite", 0f);
-            // Reverse/unreverse sprite
             if (GetMove().x < 0)
             {
+                anim.CrossFade("Walk_Sprite", 0f);
                 Vector3 theScale = initialScale;
                 theScale.x *= -1;
                 transform.localScale = theScale;
             }
-            else
+            else if(GetMove().x > 0)
             {
+                anim.CrossFade("Walk_Sprite", 0f);
                 transform.localScale = initialScale;
+            }
+            else if (GetMove().y < 0)
+            {
+                anim.CrossFade("Walk_Front", 0f);
+            }
+            else if (GetMove().y > 0)
+            {
+                anim.CrossFade("Walk_Front", 0f);
             }
         }
         else
