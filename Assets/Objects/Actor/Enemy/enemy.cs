@@ -84,7 +84,7 @@ public class enemy : Actor
     protected virtual void DoRetreat()
     {
         // Change to chase after amount of time
-        if (Time.time > lastSwitch + 4.0f)
+        if (Time.time > lastSwitch + 3.0f)
             SwitchState(EnemyState.Chase);
         // Move away from player
         moveVec = transform.position - player.transform.position;
