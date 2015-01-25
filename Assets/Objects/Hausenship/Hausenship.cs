@@ -9,7 +9,7 @@ public class Hausenship : MonoBehaviour
     public float decay = -0.1f;
     public float floor = -10.0f;
     public float ceil = 10.0f;
-    public string crashScene = "crash";
+    public string crashScene = "test.unity";
 
     void Update()
     {
@@ -18,7 +18,7 @@ public class Hausenship : MonoBehaviour
         //should respond to user input by climbing
         if (Input.anyKeyDown)
             rigidbody.velocity = new Vector3(rigidbody.velocity.x, climb, 0.0f);
-        //should point in its direction of travel
+        //should point in its direction of travel (TODO)
         
         //should cut to crash scene if it falls too low
         if (transform.position.y < floor) Application.LoadLevel(crashScene);
