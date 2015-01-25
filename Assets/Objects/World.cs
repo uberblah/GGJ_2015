@@ -18,9 +18,7 @@ public void Start ()
     tiledLand = new LandChunk[xSize, ySize]; //Let's initalize this array of land!
     worldName = "Unknown World"; //You have a better name?
     rand = new System.Random ();
-    GenerateRandWorld (); //Let there be light!!\
-
-    
+    GenerateRandWorld (); //Let there be light!!
 }
 protected void GenerateRandWorld ()
     {
