@@ -7,7 +7,6 @@ public class Player : Actor
     public float        cursorWeight = 0.25f; //weight of cursor in camera position
 
     private Vector3     initialScale;
-    private bool        facingRight;
 
     protected override Vector2 GetMove()
     {
@@ -108,10 +107,12 @@ public class Player : Actor
             else if (GetMove().y < 0)
             {
                 anim.CrossFade("Walk_Front", 0f);
+                transform.localScale = initialScale;
             }
             else if (GetMove().y > 0)
             {
                 anim.CrossFade("Walk_Front", 0f);
+                transform.localScale = initialScale;
             }
         }
         else
