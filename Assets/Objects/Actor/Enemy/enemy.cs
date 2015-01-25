@@ -114,7 +114,7 @@ public class enemy : Actor
     protected virtual void DoRetreat()
     {
         // Change to chase after amount of time
-        if (Time.time > lastSwitch + 2.5f)
+        if (Time.time > lastSwitch + 1.5f)
             SwitchState(EnemyState.Chase);
         // Move away from player
         moveVec = transform.position - player.transform.position + new Vector3(Random.Range(-10,10),Random.Range(-10,10),0);
@@ -123,8 +123,8 @@ public class enemy : Actor
     void OnCollisionEnter2D(Collision2D col)
     {
         // Move back when we bump into stuff
-        if (col.gameObject != player &&
-            col.gameObject.GetComponent<Projectile>() == null)
+        //if (col.gameObject != player &&
+        if(col.gameObject.GetComponent<Projectile>() == null)
         {
             SwitchState(EnemyState.Retreat);
         }

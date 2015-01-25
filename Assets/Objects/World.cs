@@ -128,12 +128,6 @@ public class World : MonoBehaviour
 								Boulder = (GameObject)Instantiate(Rock);
 								Boulder.GetComponent<MeshFilter>().transform.position = new Vector3((float)xCoord, (float)yCoord);
 							}
-							else if (rand.NextDouble() >= (double).9999)
-							{
-								Adversary = (GameObject)Instantiate(Enemy);
-								Adversary.GetComponent<enemy>().transform.position = new Vector3((float)xCoord, (float)yCoord);
-							}
-
                         }
 						else if (heiHei < grassyCutoff)
 						{
