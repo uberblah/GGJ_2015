@@ -55,7 +55,7 @@ public class Inventory
         if (test == null)
             piecesFound++;
 
-		if (totalScore >= 500.0f) 
+		if (totalScore >= 700.0f) 
 		{
 			Application.LoadLevel("youwon");
 		}
