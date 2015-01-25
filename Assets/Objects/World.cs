@@ -50,17 +50,21 @@ public class World : MonoBehaviour
         coarseSeed = (float)rand.NextDouble() * 400;
         GenerateRandWorld(new Vector2(mapTiles/2,mapTiles/2)); //Let there be light!!
         // pick a dry spot for the player
-        Vector2 initialPlayerPos;
+        float playerZ = player.transform.position.z;
+        Vector3 initialPlayerPos;
         do
         {
-            initialPlayerPos = new Vector2(
+            initialPlayerPos = new Vector3(
                 ((float)rand.NextDouble() - 1) * segmentGenDepth * 2 + mapTiles / 2,
-                ((float)rand.NextDouble() - 1) * segmentGenDepth * 2 + mapTiles / 2);
+                ((float)rand.NextDouble() - 1) * segmentGenDepth * 2 + mapTiles / 2,
+                playerZ);
         } while (!isItPassable(initialPlayerPos));
+        // move the player
         player.transform.position = initialPlayerPos;
         // put ship and gun near player spawn
-        weapon.transform.position = initialPlayerPos + new Vector2(5, 2);
-        ship.transform.position = initialPlayerPos + new Vector2(7, -21);
+        // reset their Z coord
+        weapon.transform.position = initialPlayerPos + new Vector3(5, 2, -playerZ);
+        ship.transform.position = initialPlayerPos + new Vector3(7, -21, -playerZ);
     }
 
     // check if it's possible to stand on a bit of land
