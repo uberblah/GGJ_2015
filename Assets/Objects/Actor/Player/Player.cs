@@ -213,8 +213,6 @@ public class Player : Actor
 
 		// Show Score
 		GUI.Box (new Rect (Screen.width - 100, Screen.height - 20, 100, 20), "Score: " + inv.totalScore.ToString());
-<<<<<<< HEAD
-=======
 
         // Reset button if dead
         if (GetComponent<Destructible>().GetDead())
@@ -227,7 +225,6 @@ public class Player : Actor
                 Application.LoadLevel(Application.loadedLevelName);
             }
         }
->>>>>>> 26aee52c4c228b3e5952cabd9654036d3ffbffc5
     }
 
     void OnCollisionEnter2D(Collision2D col)
