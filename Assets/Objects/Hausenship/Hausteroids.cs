@@ -15,14 +15,17 @@ public class Hausteroids : MonoBehaviour
 
     void Update()
     {
-        if (Time.time - last >= rate)
+        if (ship.rigidbody.useGravity)
         {
-            last = Time.time;
-            Vector3 pos = ship.transform.position + new Vector3(distance, Random.Range(ship.floor, ship.ceil), 0.0f);
-            GameObject go = Instantiate(asteroid, pos, new Quaternion()) as GameObject;
-            go.GetComponent<Rigidbody>().velocity = new Vector3(-Random.Range(minSpeed, maxSpeed), 0.0f, 0.0f);
-            Destroy(go, lifeSpan);
+            if (Time.time - last >= rate)
+            {
+                last = Time.time;
+                Vector3 pos = ship.transform.position + new Vector3(distance, Random.Range(ship.floor, ship.ceil), 0.0f);
+                GameObject go = Instantiate(asteroid, pos, new Quaternion()) as GameObject;
+                go.GetComponent<Rigidbody>().velocity = new Vector3(-Random.Range(minSpeed, maxSpeed), 0.0f, 0.0f);
+                Destroy(go, lifeSpan);
+            }
+            rate -= acceleration * Time.deltaTime;
         }
-        rate -= acceleration * Time.deltaTime;
     }
 }

@@ -18,19 +18,25 @@ public class Hausenship : MonoBehaviour
     void Start()
     {
         audio.Play();
+        rigidbody.useGravity = false;
+        cam.transform.position = new Vector3(transform.position.x, 0.0f, 0.0f) + camOffset;
     }
 
     void Update()
     {
-        if (gui && Time.time - cut >= cutDelay) Application.LoadLevel(crashScene);
-        //should tell camera to follow
-        cam.transform.position = new Vector3(transform.position.x, 0.0f, 0.0f) + camOffset;
-        //should respond to user input by climbing
-        if (Input.anyKeyDown)
-            rigidbody.velocity = new Vector3(rigidbody.velocity.x, climb, 0.0f);
-        //should cut to crash scene if it falls too low
-        if (transform.position.y < floor && !gui) Cut();
-        climb -= decay * Time.deltaTime;
+        if (rigidbody.useGravity)
+        {
+            if (gui && Time.time - cut >= cutDelay) Application.LoadLevel(crashScene);
+            //should tell camera to follow
+            cam.transform.position = new Vector3(transform.position.x, 0.0f, 0.0f) + camOffset;
+            //should respond to user input by climbing
+            if (Input.anyKeyDown)
+                rigidbody.velocity = new Vector3(rigidbody.velocity.x, climb, 0.0f);
+            //should cut to crash scene if it falls too low
+            if (transform.position.y < floor && !gui) Cut();
+            climb -= decay * Time.deltaTime;
+        }
+        else if (Input.GetKeyDown(KeyCode.Return)) rigidbody.useGravity = true;
     }
 
     void OnCollisionEnter(Collision c)
@@ -40,7 +46,7 @@ public class Hausenship : MonoBehaviour
 
     void OnGUI()
     {
-		GUI.Box (new Rect (20, Screen.height - 70, 250, 20), "PRESS ANY KEY!!!");
+		GUI.Box (new Rect (10, Screen.height - 40, 500, 30), "Press Enter to start, and then tap any keys to stay aloft!");
         if(gui) GUI.Box(new Rect(10, 10, 600, 50), "CRASH!!!\n(crash landing in progress)");
     }
 
