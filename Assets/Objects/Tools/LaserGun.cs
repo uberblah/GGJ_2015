@@ -8,7 +8,7 @@ public class LaserGun : Tool
     public override void Start()
     {
         base.Start();
-        showMenu = false; // Temporary
+        //showMenu = false; // Temporary
     }
 
     public override void Activate()
