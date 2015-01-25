@@ -32,7 +32,7 @@ public class Actor : MonoBehaviour
     public    ContextObject         selected = null;
     protected    SpriteOrientation     orientation;
 
-    private float lastToolUse; // Last time we used tool
+    protected float lastToolUse; // Last time we used tool
 
     public SpriteOrientation GetSpriteOrientation()
     {

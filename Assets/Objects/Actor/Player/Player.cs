@@ -9,6 +9,7 @@ public class Player : Actor
     // Sprite stuff
     public Sprite[]     standingSprites; // Standing sprites
     private Vector3     initialScale; // Scale we started with
+    private Animator    anim; // Animation
 
     // Footsteps
     private float       lastStep; // Time of last footstep sound
@@ -24,7 +25,9 @@ public class Player : Actor
     protected override Vector2 GetMove()
     {
         if (GetUseTool())
+        {
             return Vector2.zero; // Kill momentum when we use a tool
+        }
 
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
@@ -82,6 +85,7 @@ public class Player : Actor
         forceMul = force;
         hurt = false;
         initialScale = transform.localScale;
+        anim = GetComponent<Animator>();
     }
 
     protected override void Update()
@@ -111,9 +115,7 @@ public class Player : Actor
             if (GetMove().x < 0)
             {
                 anim.CrossFade("Walk_Sprite", 0f);
-                Vector3 theScale = initialScale;
-                theScale.x *= -1;
-                transform.localScale = theScale;
+                transform.localScale = FlipScale();
                 orientation = SpriteOrientation.ProfileLeft;
             }
             else if(GetMove().x > 0)
@@ -140,17 +142,32 @@ public class Player : Actor
             // Standing based on last orientation
             anim.CrossFade("Standing", 0f);
 
-            switch (orientation)
+            //switch (orientation)
+            //{
+            //    case SpriteOrientation.FullFront:
+            //        GetComponent<SpriteRenderer>().sprite = standingSprites[1];
+            //        break;
+            //    case SpriteOrientation.FullBack:
+            //        GetComponent<SpriteRenderer>().sprite = standingSprites[2];
+            //        break;
+            //    default:
+            //        GetComponent<SpriteRenderer>().sprite = standingSprites[0];
+            //        break;
+            //}
+            Tool tool = inv.GetActive() as Tool;
+            if (GetUseTool())
             {
-                case SpriteOrientation.FullFront:
-                    GetComponent<SpriteRenderer>().sprite = standingSprites[1];
-                    break;
-                case SpriteOrientation.FullBack:
-                    GetComponent<SpriteRenderer>().sprite = standingSprites[2];
-                    break;
-                default:
-                    GetComponent<SpriteRenderer>().sprite = standingSprites[0];
-                    break;
+                // Shoot animation
+                anim.CrossFade("Shoot", 0f);
+                // Face towards mouse cursor
+                if (mousePos.x < transform.position.x)
+                {
+                    transform.localScale = FlipScale();
+                }
+                else
+                {
+                    transform.localScale = initialScale;
+                }
             }
         }
 
@@ -222,5 +239,12 @@ public class Player : Actor
                 break;
         }
         
+    }
+
+    private Vector3 FlipScale()
+    {
+        Vector3 theScale = initialScale;
+        theScale.x *= -1;
+        return theScale;
     }
 }

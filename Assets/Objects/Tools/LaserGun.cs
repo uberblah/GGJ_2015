@@ -16,7 +16,9 @@ public class LaserGun : Tool
         if (projectile != null)
         {
             // Create projectile
-            GameObject newProj = (GameObject)Instantiate(projectile, owner.transform.position, Quaternion.identity); // Shoot from parent, not where we are
+            Vector3 handPos = owner.transform.position + new Vector3(0,1,0);
+            handPos.z = 0;
+            GameObject newProj = (GameObject)Instantiate(projectile, handPos, Quaternion.identity); // Shoot from parent, not where we are
             // Ignore collision with player
             Physics2D.IgnoreCollision(newProj.collider2D, owner.collider2D);
             // Shoot in in direction of mouse pointer
