@@ -4,6 +4,9 @@ using UnityEngine;
 public class World : MonoBehaviour
 {
     private int generationUnitSize; //How much world do we make at a time?
+    // save variables for generating map pieces on the fly
+    private float coarseSeed; // determines broad character of the map
+    private int fineSize; // size of each map piece
     public string worldName; //Name of the planet
     public float[,] tiledLand; //This is the grid of land, X,Y cooridinates for that chunk of land.
     private System.Random rand;
@@ -31,21 +34,23 @@ public class World : MonoBehaviour
         tiledLand = new float[generationUnitSize, generationUnitSize]; //Let's initalize this array of land!
         worldName = "Unknown World"; //You have a better name?
         rand = new System.Random();
-        GenerateRandWorld(); //Let there be light!!
+        coarseSeed = (float)rand.NextDouble() * 400;
+        fineSize = 30;
+        GenerateRandWorld(Vector2.zero,8); //Let there be light!!
     }
     public bool isItPassable(Vector2 locale)
     {
         return (tiledLand[(int)locale.x / generationUnitSize, (int)locale.y / generationUnitSize] >= waterCutoff);
     }
-    protected void GenerateRandWorld()
+
+    // origin will be rounded to nearest fineSize
+    // radius is the distance around the origin that will be generated
+    protected void GenerateRandWorld(Vector2 origin,int radius)
     {
 		GameObject partyPart; //PARTS ENTER INTO THE WORLD!!! VIVE LE PARTS, THEY FLEE THE OPPRESIVE PRISON WHICH WAS ONCE THEIRS!
         GameObject TiTi;
         // first, create noise for coarse generation
-        // what size will coarse generation use?
-        int fineSize = 30;
         int coarseSize = generationUnitSize / fineSize;
-        float coarseSeed = (float)rand.NextDouble() * 400;
         float coarseVariability = 6;
         float fineVariability = 3;
         // create the offsets array
