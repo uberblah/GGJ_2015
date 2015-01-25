@@ -124,13 +124,14 @@ public class Player : Actor
             }
             else if (GetMove().y > 0)
             {
-                anim.CrossFade("Walk_Front", 0f);
+                anim.CrossFade("Back_Walk", 0f);
                 transform.localScale = initialScale;
                 orientation = SpriteOrientation.FullFront;
             }
         }
         else
         {
+            // Standing based on last orientation
             anim.CrossFade("Standing", 0f);
         }
 
@@ -168,6 +169,10 @@ public class Player : Actor
         // Show active object, temporary?
         if(inv.GetActive() != null)
             GUI.Box(new Rect(0, 0, 200, 20), "Active item: " + inv.GetActive().gameObject.name);
+
+        // Show health
+        
+        GUI.Box(new Rect(0,Screen.height - 20, GetComponent<Destructible>().health * 2, 20), "Health");
     }
 
     void OnCollisionEnter2D(Collision2D col)
