@@ -5,7 +5,7 @@ public class World : MonoBehaviour
 {
     private int segmentGenDepth; //How many segments do we make per direction at a time?
     private float coarseSeed; // determines and saves the broad character of the map
-    private int segmentSize; // tiles per map generation segment
+    public int segmentSize; // tiles per map generation segment
     private int mapSegments; // number of segments in the global map
     public string worldName; //Name of the planet
     public float[,] tiledLand; //This is the entire grid of land chunks

@@ -195,7 +195,13 @@ public class Player : Actor
         }
 
         // check if we need to generate more map segments
-        // TODO
+        int xSeg = (int)transform.position.x / theWorld.segmentSize;
+        int ySeg = (int)transform.position.y / theWorld.segmentSize;
+        if (!theWorld.generatedSegment[xSeg, ySeg] || !theWorld.generatedSegment[xSeg + 1, ySeg] ||
+            !theWorld.generatedSegment[xSeg - 1, ySeg] || !theWorld.generatedSegment[xSeg, ySeg + 1] ||
+            !theWorld.generatedSegment[xSeg, ySeg - 1] || !theWorld.generatedSegment[xSeg + 1, ySeg + 1] ||
+            !theWorld.generatedSegment[xSeg - 1, ySeg - 1])
+            theWorld.GenerateRandWorld(transform.position);
     }
 
     protected override void FixedUpdate()
