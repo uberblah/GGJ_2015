@@ -118,6 +118,16 @@ public class Actor : MonoBehaviour
         body.AddForce(forceMul * GetMove().normalized);
     }
 
+    public virtual void OnDamage()
+    {
+
+    }
+
+    public virtual void OnHeal()
+    {
+        
+    }
+
     // Update is called once per frame
     protected virtual void Update()
     {

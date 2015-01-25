@@ -12,6 +12,11 @@ public class Player : Actor
     public AudioClip    leftFootstep;
     public AudioClip    rightFootstep;
 
+    // Hurt
+    private bool        hurt; // Are we hurtin'?
+    public float        hurtTime; // How long we flash red
+    public float        hurtForce; // Force of a hurt
+
     protected override Vector2 GetMove()
     {
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -68,7 +73,7 @@ public class Player : Actor
         base.Start();
         // Set initial values
         forceMul = force;
-
+        hurt = false;
         initialScale = transform.localScale;
     }
 
@@ -102,21 +107,25 @@ public class Player : Actor
                 Vector3 theScale = initialScale;
                 theScale.x *= -1;
                 transform.localScale = theScale;
+                orientation = SpriteOrientation.ProfileLeft;
             }
             else if(GetMove().x > 0)
             {
                 anim.CrossFade("Walk_Sprite", 0f);
                 transform.localScale = initialScale;
+                orientation = SpriteOrientation.ProfileRight;
             }
             else if (GetMove().y < 0)
             {
                 anim.CrossFade("Walk_Front", 0f);
                 transform.localScale = initialScale;
+                orientation = SpriteOrientation.FullBack;
             }
             else if (GetMove().y > 0)
             {
                 anim.CrossFade("Walk_Front", 0f);
                 transform.localScale = initialScale;
+                orientation = SpriteOrientation.FullFront;
             }
         }
         else
@@ -151,5 +160,27 @@ public class Player : Actor
     void OnCollisionEnter2D(Collision2D col)
     {
 
+    }
+
+    public override void OnDamage()
+    {
+        hurt = true;
+        // Force away from where we're facing
+        switch(orientation)
+        {
+            case SpriteOrientation.ProfileLeft:
+                body.AddForce(Vector2.right * hurtForce);
+                break;
+            case SpriteOrientation.ProfileRight:
+                body.AddForce(Vector2.right * -hurtForce);
+                break;
+            case SpriteOrientation.FullBack:
+                body.AddForce(Vector2.up * hurtForce);
+                break;
+            case SpriteOrientation.FullFront:
+                body.AddForce(Vector2.up * -hurtForce);
+                break;
+        }
+        
     }
 }
