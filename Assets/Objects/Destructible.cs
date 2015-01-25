@@ -3,10 +3,13 @@ using System.Collections;
 
 public class Destructible : MonoBehaviour
 {
-    public float maxHealth = 100.0f;
-    public float health = 100.0f;
-    public float armor = 0.5f;
-    private Actor act;
+    public float        maxHealth = 100.0f;
+    public float        health = 100.0f;
+    public float        armor = 0.5f;
+    private Actor       act;
+    private bool        dead; // You are dead, dead, dead
+
+    public bool GetDead() { return dead; }
 
     void Start()
     {
@@ -40,6 +43,7 @@ public class Destructible : MonoBehaviour
     //this can be overridden to create other behaviors for destruction
     protected virtual void OnDestroy()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        dead = true;
     }
 }
