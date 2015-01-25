@@ -106,7 +106,10 @@ public class Player : Actor
 
         // Don't do any of this if we're dead
         if (GetComponent<Destructible>().GetDead())
+        {
+            Screen.showCursor = true;
             return;
+        }
 
         Vector3 mousePos = view.ScreenToWorldPoint(Input.mousePosition);
         Vector3 newpos = transform.position + ((mousePos - view.transform.position) * cursorWeight);
@@ -206,11 +209,6 @@ public class Player : Actor
 
     public void OnGUI()
     {
-        // Show crosshair
-        int cursorSizeX = 64;
-        int cursorSizeY = 64;
-        GUI.DrawTexture(new Rect(Input.mousePosition.x - cursorSizeX, (Screen.height - Input.mousePosition.y) - cursorSizeY, cursorSizeX, cursorSizeY), crosshair);
-
         // Show active object, temporary?
         if(inv.GetActive() != null)
             GUI.Box(new Rect(0, 0, 200, 20), "Active item: " + inv.GetActive().gameObject.name);
@@ -234,10 +232,17 @@ public class Player : Actor
             if (GUI.Button(new Rect((Screen.width / 2) - 50, Screen.height - 50, 50, 50), "Restart"))
             {
                 transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
-                GUI.Box(new Rect(Screen.width / 2, Screen.height /2 , 100, 30), "Loading");
+                GUI.Box(new Rect(Screen.width / 2, Screen.height / 2, 100, 30), "Loading");
 
                 Application.LoadLevel(Application.loadedLevelName);
             }
+        }
+        else
+        {
+            // Show crosshair
+            int cursorSizeX = 64;
+            int cursorSizeY = 64;
+            GUI.DrawTexture(new Rect(Input.mousePosition.x - cursorSizeX, (Screen.height - Input.mousePosition.y) - cursorSizeY, cursorSizeX, cursorSizeY), crosshair);
         }
     }
 
