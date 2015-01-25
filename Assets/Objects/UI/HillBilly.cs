@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HillBilly : MonoBehaviour {
-    public string introScene = "Scenes/intro.unity";
+    public string introScene = "intro";
 
     public void Exit()
     {
