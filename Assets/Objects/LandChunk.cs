@@ -3,10 +3,8 @@ using UnityEngine;
 public class LandChunk : MonoBehaviour
 {
     public float Height;
-    public enum landTypes {water, notWater};
-    public landTypes landType;
 	public Sprite spiteSprite;
-	public Sprite Land, NotLand;
+	public Sprite Water, Dirt, Grass, Forest, Rock;
 	public Vector2 location;
 
     public void Start()
@@ -28,22 +26,25 @@ public class LandChunk : MonoBehaviour
 
     public void DetermineForm()
     {
-        if (Height >= .25f)
-        {
-            landType = landTypes.notWater;
-        }
-        else
-        {
-            landType = landTypes.water;
-        }
-
-        if (landType == landTypes.water)
-        {
-            assignSprite(NotLand);
-        }
-        else
-        {
-            assignSprite(Land);
-        }
+		if (Height < .2f) 
+		{
+			assignSprite(Water);
+		}
+		else if (Height < .4f) 
+		{
+			assignSprite(Dirt);
+		}
+		else if (Height < .6f) 
+		{
+			assignSprite(Grass);
+		}
+		else if (Height < .8f) 
+		{
+			assignSprite(Forest);
+		}
+		else 
+		{
+			assignSprite(Rock);
+		}
     }
 }

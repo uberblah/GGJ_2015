@@ -9,13 +9,22 @@ public class World : MonoBehaviour
     private System.Random rand;
     public GameObject Tile;
     public GameObject WateryTile;
+	public GameObject GrassyTile;
+	public GameObject ForestyTile;
+	public GameObject RockyTile;
     public float waterCutoff;
+	public float baseGroundCutoff;
+	public float grassyCutoff;
+	public float forestyCutoff;
 
     public void Start()
     {
         renderer.enabled = true;
         generationUnitSize = 250; // chunks of land to generate at a time
         waterCutoff = .20f;
+		baseGroundCutoff = .4f;
+		grassyCutoff = .6f;
+		forestyCutoff = .8f;
         tiledLand = new float[generationUnitSize, generationUnitSize]; //Let's initalize this array of land!
         worldName = "Unknown World"; //You have a better name?
         rand = new System.Random();
@@ -70,20 +79,41 @@ public class World : MonoBehaviour
                         float noiseValue = Mathf.PerlinNoise(fineSeed + fineVariability * (float)fineX / (float)fineSize, fineSeed + fineVariability * (float)fineY / (float)fineSize); // create noise
                         noiseValue = noiseValue * .25f; // at most .25 different
                         float heiHei = thisOffset + noiseValue;
-                        if (heiHei >= waterCutoff)
+                        if (heiHei < waterCutoff)
                         {
-                            TiTi = (GameObject)Instantiate(Tile);
+							TiTi = (GameObject)Instantiate(WateryTile);
                             TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
                             TiTi.GetComponent<LandChunk>().Height = heiHei;
                             TiTi.GetComponent<LandChunk>().DetermineForm();
                         }
-                        else
+                        else if (heiHei < baseGroundCutoff)
                         {
-                            TiTi = (GameObject)Instantiate(WateryTile);
+							TiTi = (GameObject)Instantiate(Tile);
                             TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
                             TiTi.GetComponent<LandChunk>().Height = heiHei;
                             TiTi.GetComponent<LandChunk>().DetermineForm();
                         }
+						else if (heiHei < grassyCutoff)
+						{
+							TiTi = (GameObject)Instantiate(GrassyTile);
+							TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
+							TiTi.GetComponent<LandChunk>().Height = heiHei;
+							TiTi.GetComponent<LandChunk>().DetermineForm();
+						}
+						else if (heiHei < forestyCutoff)
+						{
+							TiTi = (GameObject)Instantiate(ForestyTile);
+							TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
+							TiTi.GetComponent<LandChunk>().Height = heiHei;
+							TiTi.GetComponent<LandChunk>().DetermineForm();
+						}
+						else
+						{
+							TiTi = (GameObject)Instantiate(RockyTile);
+							TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
+							TiTi.GetComponent<LandChunk>().Height = heiHei;
+							TiTi.GetComponent<LandChunk>().DetermineForm();
+						}
                     }
                 }
 
