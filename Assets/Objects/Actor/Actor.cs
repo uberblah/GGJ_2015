@@ -107,9 +107,9 @@ public class Actor : MonoBehaviour
         inv = new Inventory();
         inv.Start();
         body = GetComponent<Rigidbody2D>();
-        if (body == null) Debug.Log(name + " failed to find its body!");
+        //if (body == null) Debug.Log(name + " failed to find its body!");
         coll = GetComponent<Collider2D>();
-        if (coll == null) Debug.Log(name + " failed to find its collider!");
+        //if (coll == null) Debug.Log(name + " failed to find its collider!");
     }
 
     protected virtual void FixedUpdate()
