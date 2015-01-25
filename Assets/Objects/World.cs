@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-private int xSize, ySize; //How big is the world?
+private int generationUnitSize; //How much world do we make at a time?
 public string worldName; //Name of the planet
 public float[,] tiledLand; //This is the grid of land, X,Y cooridinates for that chunk of land.
 private System.Random rand;
@@ -14,10 +14,9 @@ public float waterCutoff;
 public void Start ()
 {
     renderer.enabled = true;
-    xSize = 200; // chunks of land across
-    ySize = 200; // chunks of land high
+    generationUnitSize = 250; // chunks of land to generate at a time
 	waterCutoff = .20f;
-    tiledLand = new float[xSize, ySize]; //Let's initalize this array of land!
+    tiledLand = new float[generationUnitSize, generationUnitSize]; //Let's initalize this array of land!
     worldName = "Unknown World"; //You have a better name?
     rand = new System.Random ();
     GenerateRandWorld (); //Let there be light!!
@@ -29,22 +28,55 @@ public void Start ()
 protected void GenerateRandWorld ()
     {
 		GameObject TiTi;
-    for (int x = 0; x < xSize; x++) { //For Every land across
-    for (int y = 0; y<ySize; y++) { //And every down
+    // first, create noise for coarse generation
+    // what size will coarse generation use?
+    int fineSize = 30;
+    int coarseSize = generationUnitSize / fineSize;
+    float coarseSeed = (float)rand.NextDouble() * 400;
+    float coarseVariability = 6;
+    float fineVariability = 3;
+    // create the offsets array
+    float[,] heiOffset = new float[coarseSize+1,coarseSize+1]; // create array for caorse offset storage
+    for (int coarseX = 0; coarseX <= coarseSize; coarseX++) { // for every coarse unit across
+    for (int coarseY = 0; coarseY <= coarseSize; coarseY++) { // for every coarse unit down
+        // Use Perlin noise to get a height offset
+        float noiseValue = Mathf.PerlinNoise(coarseSeed + coarseVariability * (float)coarseX / (float)coarseSize, coarseSeed + coarseVariability * (float)coarseY / (float)coarseSize); // create noise
+        heiOffset[coarseX, coarseY] = noiseValue * .75f; // scale down
+    }
+    }
+    for (int coarseX = 0; coarseX < coarseSize; coarseX++) { // for every coarse unit across
+    for (int coarseY = 0; coarseY < coarseSize; coarseY++) { // for every coarse unit down
+        float q11 = heiOffset[coarseX,coarseY];
+        float q12 = heiOffset[coarseX,coarseY+1];
+        float q21 = heiOffset[coarseX+1,coarseY];
+        float q22 = heiOffset[coarseX + 1, coarseY + 1];
+        float fineSeed = (float)rand.NextDouble() * 400;
+        for (int fineX = 0; fineX < fineSize; fineX++)
+        { //For Every land across
+            float r1 = q11 * (fineSize - fineX) / fineSize + q21 * fineX / fineSize;
+            float r2 = q12 * (fineSize - fineX) / fineSize + q22 * fineX / fineSize;
+        for (int fineY = 0; fineY < fineSize; fineY++)
+        { //And every down
+            float thisOffset = r1 * (fineSize - fineY) / fineSize + r2 * fineY / fineSize;
+            // where are we?
+            int xCoord = coarseX * fineSize + fineX;
+            int yCoord = coarseY * fineSize + fineY;
     //Determine the height from Perlin Noise //And let the land determine what itself is based on it's height.
-	float heiHei = Mathf.PerlinNoise ((float)Math.Abs (x / ((float)xSize) + (rand.NextDouble () - rand.NextDouble())*.75f), (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - rand.NextDouble())*.75f));
-	tiledLand[x,y] = heiHei;
+            //float noiseValue = Mathf.PerlinNoise(fineSeed + (float)xCoord / (float)generationUnitSize, fineSeed + (float)yCoord / (float)generationUnitSize); // create noise
+            float noiseValue = Mathf.PerlinNoise(fineSeed + fineVariability * (float)fineX / (float)fineSize, fineSeed + fineVariability * (float)fineY / (float)fineSize); // create noise
+            noiseValue = noiseValue * .25f; // at most .25 different
+            float heiHei = thisOffset + noiseValue;
 	if (heiHei >= waterCutoff)
 {
 	TiTi = (GameObject) Instantiate(Tile);
-	TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)(x), (float)(y)));
+	TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
 	TiTi.GetComponent<LandChunk>().Height = heiHei;
 	TiTi.GetComponent<LandChunk>().DetermineForm();
 }
 				else
 {
 	TiTi = (GameObject) Instantiate(WateryTile);
-	TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)(x), (float)(y)));
+	TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
 	TiTi.GetComponent<LandChunk>().Height = heiHei;
 	TiTi.GetComponent<LandChunk>().DetermineForm();
 }
