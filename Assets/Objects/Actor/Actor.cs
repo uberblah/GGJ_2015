@@ -32,6 +32,8 @@ public class Actor : MonoBehaviour
     public    ContextObject         selected = null;
     protected    SpriteOrientation     orientation;
 
+    private float lastToolUse; // Last time we used tool
+
     public SpriteOrientation GetSpriteOrientation()
     {
         return orientation;
@@ -122,7 +124,11 @@ public class Actor : MonoBehaviour
         Vector2 diff = GetTarget() - body.position;
         rotation = (Mathf.Rad2Deg * Mathf.Atan2(diff.y, diff.x)) - 90.0f;
         Tool tool = inv.GetActive() as Tool;
-        if (GetUseTool() && tool != null) tool.Activate();
+        if (GetUseTool() && tool != null && Time.time > lastToolUse + tool.GetDelay())
+        {
+            tool.Activate();
+            lastToolUse = Time.time;
+        }
         int action = GetAction();
         if (action > 0 && selected != null) selected.DoMethod(this, action);
         if (GetDrop()) inv.PutDown(inv.GetActive(), this.transform.position);

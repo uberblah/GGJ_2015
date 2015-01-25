@@ -6,8 +6,6 @@ public class Player : Actor
     public float force; // Force added on move
     public float cursorWeight = 0.25f; //weight of cursor in camera position
 
-    private float       lastToolUse; // Last time we used tool
-
     protected override Vector2 GetMove()
     {
         return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -64,7 +62,6 @@ public class Player : Actor
         base.Start();
         // Set initial values
         forceMul = force;
-        lastToolUse = Time.time;
     }
 
     protected override void Update()
