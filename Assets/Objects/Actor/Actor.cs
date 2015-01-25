@@ -104,7 +104,6 @@ public class Actor : MonoBehaviour
 
         // initialize the sprite orientation to profile right
         orientation = SpriteOrientation.ProfileLeft;
-
         inv = new Inventory();
         inv.Start();
         body = GetComponent<Rigidbody2D>();

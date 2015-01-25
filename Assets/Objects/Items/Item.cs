@@ -6,7 +6,7 @@ public class Item : ContextObject
     protected static List<Item> dropped = new List<Item>();
 
 	protected Rigidbody2D   body; //Object Body
-	protected float         value; // Assumed to be a random value to the object, either how much it contributes to a task or goal
+	public float         value; // Assumed to be a random value to the object, either how much it contributes to a task or goal
 	private bool            beingUsed; // Is it being used punk?
 
 	#region Owner Stuff

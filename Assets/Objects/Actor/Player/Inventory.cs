@@ -9,9 +9,11 @@ public class Inventory
 {
 	List<Item>  items;
 	int         currentlyActiveItem = 0;
+	public float       totalScore;
 
 	public void Start()
 	{
+		totalScore = 0.0f;
 		items = new List<Item> ();
 	}
 
@@ -46,6 +48,7 @@ public class Inventory
 	{
 		items.Add (i);
 		i.ItemPickedUp ();
+		totalScore += i.value;
 	}
 
 	public void PutDown(Item i, Vector2 LocationPutDown)

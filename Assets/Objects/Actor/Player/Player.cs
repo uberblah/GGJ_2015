@@ -194,6 +194,9 @@ public class Player : Actor
         // Show health
         
         GUI.Box(new Rect(0,Screen.height - 20, GetComponent<Destructible>().health * 2, 20), "Health");
+
+		// Show Score
+		GUI.Box (new Rect (Screen.width - 100, Screen.height - 20, 100, 20), "Score: " + inv.totalScore.ToString()); 
     }
 
     void OnCollisionEnter2D(Collision2D col)

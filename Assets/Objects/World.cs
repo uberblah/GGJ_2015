@@ -12,6 +12,9 @@ public class World : MonoBehaviour
 	public GameObject GrassyTile;
 	public GameObject ForestyTile;
 	public GameObject RockyTile;
+	public GameObject commonPart;
+	public GameObject uncommonPart;
+	public GameObject rarePart;
     public float waterCutoff;
 	public float baseGroundCutoff;
 	public float grassyCutoff;
@@ -36,6 +39,7 @@ public class World : MonoBehaviour
     }
     protected void GenerateRandWorld()
     {
+		GameObject partyPart; //PARTS ENTER INTO THE WORLD!!! VIVE LE PARTS, THEY FLEE THE OPPRESIVE PRISON WHICH WAS ONCE THEIRS!
         GameObject TiTi;
         // first, create noise for coarse generation
         // what size will coarse generation use?
@@ -92,6 +96,12 @@ public class World : MonoBehaviour
                             TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
                             TiTi.GetComponent<LandChunk>().Height = heiHei;
                             TiTi.GetComponent<LandChunk>().DetermineForm();
+							if (rand.NextDouble() >= (double).999)
+							{
+								 partyPart = (GameObject)Instantiate(uncommonPart);
+								partyPart.GetComponent<Item>().value = 50;
+								partyPart.GetComponent<Item>().transform.position = new Vector2((float)xCoord, (float)yCoord);
+							}
                         }
 						else if (heiHei < grassyCutoff)
 						{
@@ -99,6 +109,13 @@ public class World : MonoBehaviour
 							TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
 							TiTi.GetComponent<LandChunk>().Height = heiHei;
 							TiTi.GetComponent<LandChunk>().DetermineForm();
+							if (rand.NextDouble() >=(double).999)
+							{
+								partyPart = (GameObject)Instantiate(commonPart);
+								partyPart.GetComponent<Item>().value = 25;
+								partyPart.GetComponent<Item>().transform.position = new Vector2((float)xCoord, (float)yCoord);
+
+							}
 						}
 						else if (heiHei < forestyCutoff)
 						{
@@ -106,6 +123,12 @@ public class World : MonoBehaviour
 							TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
 							TiTi.GetComponent<LandChunk>().Height = heiHei;
 							TiTi.GetComponent<LandChunk>().DetermineForm();
+							if (rand.NextDouble() >=(double).999)
+							{
+								partyPart = (GameObject)Instantiate(rarePart);
+								partyPart.GetComponent<Item>().value = 100;
+								partyPart.GetComponent<Item>().transform.position = new Vector2((float)xCoord, (float)yCoord);
+							}
 						}
 						else
 						{
@@ -113,6 +136,12 @@ public class World : MonoBehaviour
 							TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)xCoord, (float)yCoord));
 							TiTi.GetComponent<LandChunk>().Height = heiHei;
 							TiTi.GetComponent<LandChunk>().DetermineForm();
+							if (rand.NextDouble() >=(double).99)
+							{
+							partyPart = (GameObject)Instantiate(rarePart);
+							partyPart.GetComponent<Item>().value = 100;
+							partyPart.GetComponent<Item>().transform.position = new Vector2((float)xCoord, (float)yCoord);
+							}
 						}
                     }
                 }
