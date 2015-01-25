@@ -246,7 +246,7 @@ public class Player : Actor
         }
     }
 
-    public virtual void GiveItem(Item i)
+    public override void GiveItem(Item i)
     {
         base.GiveItem(i);
         // Play pickup sound
