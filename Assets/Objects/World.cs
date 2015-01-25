@@ -4,6 +4,7 @@ using UnityEngine;
 public class World : MonoBehaviour
 {
     private int generationUnitSize; //How much world do we make at a time?
+    private float coarseSeed; // save the coarse seed for ongoing generation
     public string worldName; //Name of the planet
     public float[,] tiledLand; //This is the grid of land, X,Y cooridinates for that chunk of land.
     private System.Random rand;
@@ -28,6 +29,7 @@ public class World : MonoBehaviour
         tiledLand = new float[generationUnitSize, generationUnitSize]; //Let's initalize this array of land!
         worldName = "Unknown World"; //You have a better name?
         rand = new System.Random();
+        coarseSeed = (float)rand.NextDouble() * 400;
         GenerateRandWorld(); //Let there be light!!
     }
     public bool isItPassable(Vector2 locale)
@@ -41,7 +43,6 @@ public class World : MonoBehaviour
         // what size will coarse generation use?
         int fineSize = 30;
         int coarseSize = generationUnitSize / fineSize;
-        float coarseSeed = (float)rand.NextDouble() * 400;
         float coarseVariability = 6;
         float fineVariability = 3;
         // create the offsets array
