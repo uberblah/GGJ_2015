@@ -38,7 +38,17 @@ public class World : MonoBehaviour
         coarseSeed = (float)rand.NextDouble() * 400;
         fineSize = 30;
         GenerateRandWorld(Vector2.zero,8); //Let there be light!!
-        // TODO: set player position
+        // pick a dry spot for the player
+        Vector2 initialPlayerPos;
+        do
+        {
+            initialPlayerPos = new Vector2(
+                (float)rand.NextDouble() * generationUnitSize,
+                (float)rand.NextDouble() * generationUnitSize);
+        } while (!isItPassable(initialPlayerPos));
+        // create the player
+        Vector3 initPlayerPos = new Vector3(initialPlayerPos.x, initialPlayerPos.y);
+        Instantiate(player, initPlayerPos, Quaternion.identity);
     }
     public bool isItPassable(Vector2 locale)
     {
