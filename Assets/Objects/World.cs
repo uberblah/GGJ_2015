@@ -7,7 +7,8 @@ private int xSize, ySize; //How big is the world?
 public string worldName; //Name of the planet
 public LandChunk[,] tiledLand; //This is the grid of land, X,Y cooridinates for that chunk of land.
 private System.Random rand;
-public Texture2D Land, NotLand;
+public GameObject Tile;
+public GameObject WateryTile;
 
 public void Start ()
 {
@@ -23,16 +24,28 @@ public void Start ()
 }
 protected void GenerateRandWorld ()
     {
+		GameObject TiTi;
     for (int x = 0; x < xSize; x++) { //For Every land across
     for (int y = 0; y<ySize; y++) { //And every down
-    tiledLand [x, y] = new LandChunk ();
-    //Determine the height from Perlin Noise
-    tiledLand [x, y].Height = Mathf.PerlinNoise ((float)Math.Abs (x / ((float)xSize) + (rand.NextDouble () - rand.NextDouble())),
-    (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - rand.NextDouble())));
-    tiledLand [x, y].DetermineForm (); //And let the land determine what itself is based on it's height.
+    //Determine the height from Perlin Noise //And let the land determine what itself is based on it's height.
+	float heiHei = Mathf.PerlinNoise ((float)Math.Abs (x / ((float)xSize) + (rand.NextDouble () - rand.NextDouble())), (float)Math.Abs (y / ((float)ySize) + (rand.NextDouble () - rand.NextDouble())));
+	if (heiHei >= .25)
+{
+	TiTi = (GameObject) Instantiate(Tile);
+	TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)(x), (float)(y)));
+	TiTi.GetComponent<LandChunk>().Height = heiHei;
+	TiTi.GetComponent<LandChunk>().DetermineForm();
+}
+				else
+{
+	TiTi = (GameObject) Instantiate(WateryTile);
+	TiTi.GetComponent<LandChunk>().setLocation(new Vector2((float)(x), (float)(y)));
+	TiTi.GetComponent<LandChunk>().Height = heiHei;
+	TiTi.GetComponent<LandChunk>().DetermineForm();
+}
     }
-
     }
+	
 }
 	/*
     protected void OnGUI()

@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: c8d7c01d6cc5f04468c5a74a83d93d13
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - spiteSprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - Land: {fileID: 2800000, guid: cbd58d20cd57cff4083d93ba729f9e70, type: 3}
+  - NotLand: {fileID: 2800000, guid: da0b76efe88f3854480d1eecd37c7142, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

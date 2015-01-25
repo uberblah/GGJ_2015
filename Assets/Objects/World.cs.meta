@@ -3,8 +3,8 @@ guid: 52fb6979e0e40ac43a17ae96f04f8589
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - Land: {fileID: 2800000, guid: cbd58d20cd57cff4083d93ba729f9e70, type: 3}
-  - NotLand: {fileID: 2800000, guid: da0b76efe88f3854480d1eecd37c7142, type: 3}
+  - Tile: {fileID: 147628, guid: d47306f0902d3c84c8c7044f48d61393, type: 2}
+  - WateryTile: {fileID: 144300, guid: 3c0c75fad585cb345a2cca891b36e3a3, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
